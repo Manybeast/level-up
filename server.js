@@ -57,8 +57,8 @@ app.delete('/fruites/:index', function (req, res) {
   }
 })
 
-app.post('/users', function (req, res) {
-
+app.get('/users', function (req, res) {
+  console.log('Reuest recived!!!');
   res.sendFile('users.json',  { root: __dirname });
 })
 
