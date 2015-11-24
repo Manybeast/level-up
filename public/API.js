@@ -26,7 +26,7 @@ var API = (function () {
 
             xhr.onreadystatechange = function() { // (3)
                 if (xhr.readyState != 4) return;
-
+                debugger;
                 if (xhr.status != 200) {
                     console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
                 } else {

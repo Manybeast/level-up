@@ -4,4 +4,6 @@
 
 var fruites = new PriceList('.fruites');
 
-
+API._post('sum', {a:1, b:2}, function (res) {
+    console.log(res);
+});
