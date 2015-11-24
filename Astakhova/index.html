@@ -11,6 +11,7 @@
 			box-shadow: 0px 2px 4px #383838;
 			padding: 10px;
 			outline: none;
+			margin: 5px;
 		}
 		.btnGet {
 			background: #0071FF;
@@ -20,11 +21,12 @@
 		.btn:active {
 			box-shadow: 0px 1px 1px #383838;
 		}
-		.btnGet:hover {
-			background: #0059C8
+		.btn:hover {
+			background: #0059C8;
+			color:#FFF;
 		}
 		.item {
-			padding: 20px;
+			padding: 10px;
 			cursor: pointer;
 		}
 		.input {
@@ -35,21 +37,19 @@
 			padding:9px;
 			outline: none;
 		}
-		.btnRemove {
-			margin-left:10px;
-		}
 	</style>
 </head>
 <body>
-	<div class="fruites">
-		<input class = "btn btnAdd" type="button" value = "add" id = "addFruite" />
-		<input type = "text" class = "input" id = "input" />
-		<ul class="output" id = "output">
-		</ul>
-	</div>
+	<h1>Hello World</h1>
+	<input class = "btn btnGet" type="button" value = "add" id = "addFruite" />
+	<input type = "text" class = "input" id = "input" />
+	<ul class="output" id = "output">
+	</ul>
 	<!--<script src = "/scripts.sync.js"></script> -->
 	<script src = "/API.js"></script>
-	<script src = "/price.list.module.js"></script>
-	<script src = "/main.js"></script>
+	<!--<script src = "/script.async.js"></script>-->
+	<script src = "/myAPI.js"></script>
+	<script src = "/myasync.js"></script>
+
 </body>
 </html>

@@ -4,7 +4,8 @@ getBtn.addEventListener('click', function () {
 	fruites.forEach(function (item, i) {
 		return print(item, i);
 	});
-})
+});
+
 function getItems () {
 	 var xhr = new XMLHttpRequest();
 

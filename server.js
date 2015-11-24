@@ -10,7 +10,7 @@ var fruites = [
     "Ananas"
 ];
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
@@ -21,14 +21,17 @@ app.get('/', function (req, res) {
 
 
 app.get('/fruites', function (req, res) {
-  console.log(req.query);
-  res.status(200).send(fruites);
+  setTimeout(function () {
+    res.status(200).send(fruites);
+
+  }, 3000)
+
 })
 
 app.post('/submit', function (req, res) {
   console.log(req.body);
   res.status(200).end();
-})
+});
 
 app.post('/fruites', function (req, res) {
   if(req.body.fruite) {
@@ -36,11 +39,12 @@ app.post('/fruites', function (req, res) {
      console.log('add to Array');
     res.status(200).send(fruites);
   }  
-})
+});
 
 app.put('/fruites/:index', function (req, res) {
-   if(req.params.index && Number(req.params.index) < fruites.length && req.query.fruite) {  
-    fruites.splice(req.params.index, 1, req.query.fruite);
+  console.log(req.body);
+   if(req.params.index && Number(req.params.index) < fruites.length && req.body.fruite) {
+    fruites.splice(req.params.index, 1, req.body.fruite);
     console.log('Update in Array');
     res.status(200).send(fruites);
   } else {
@@ -49,9 +53,12 @@ app.put('/fruites/:index', function (req, res) {
 })
 
 app.delete('/fruites/:index', function (req, res) {
-  if(req.params.index && Number(req.params.index) < fruites.length) {  
-    fruites.splice(req.params.index, 1);
-    res.status(200).send(fruites);
+  if(req.params.index && Number(req.params.index) < fruites.length) {
+    setTimeout(function () {
+      fruites.splice(req.params.index, 1);
+      res.status(200).send(fruites);
+    }, 3000);
+
   } else {
     res.status(500).send('Bad request').end()
   }

@@ -1,57 +1,41 @@
-var API = {
-	get: function (url, callback) {
-		var xhr = new XMLHttpRequest();//Обьект который позволяет совершать запросы на сервер
-		
-		xhr.open('GET', url, true);
-		xhr.send();
+var API = (function () {
+    return {
+        _get: function (url, callback) {
+            var xhr = new XMLHttpRequest();
 
-		xhr.onreadystatechange = function() { // (3)
-			if (xhr.readyState != 4) return;
+            xhr.open('GET', 'fruites?fruite=jshgdkahjsdgkas', true);
 
-			if (xhr.status != 200) {
-				console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-			} else {
-				callback(JSON.parse(xhr.response));//Вызов коллбека(getFruites)
-			}
-  		};
-	},
+            xhr.send();
 
-	post: function (url, data, callback) {
-		var xhr = new XMLHttpRequest();//Обьект который позволяет совершать запросы на сервер
-		var _sendedData = JSON.stringify(data);
+            xhr.onreadystatechange = function() { // (3)
+                if (xhr.readyState != 4) return;
 
-		xhr.open('POST', url, true);
-		xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                if (xhr.status != 200) {
+                    console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                } else {
+                    callback(JSON.parse(xhr.response));//Вызов коллбека(getFruites)
+                }
+            };
+        },
+        _post: function (url, data, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
-		xhr.send(_sendedData);
+            xhr.send(JSON.stringify(data));
 
-		xhr.onreadystatechange = function() { 
-			if (xhr.readyState != 4) return;
+            xhr.onreadystatechange = function() { // (3)
+                if (xhr.readyState != 4) return;
 
-			if (xhr.status != 200) {
-				console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-			} else {
-				callback(JSON.parse(xhr.response));//Вызов коллбека(getFruites)
-			}
-	  	};
-	},
+                if (xhr.status != 200) {
+                    console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                } else {
+                    callback(JSON.parse(xhr.response));//Вызов коллбека(getFruites)
+                }
+            };
 
-	delete: function (url, callback) {
-		var xhr = new XMLHttpRequest();//Обьект который позволяет совершать запросы на сервер
-		var _sendedData = JSON.stringify();
-
-		xhr.open('DELETE', url, true);
-
-		xhr.send();
-
-		xhr.onreadystatechange = function() { 
-			if (xhr.readyState != 4) return;
-
-			if (xhr.status != 200) {
-				console.log('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-			} else {
-				callback(JSON.parse(xhr.response));//Вызов коллбека(getFruites)
-			}
-	  	};
-	}
-};
+        },
+        _put: '',
+        _delete: ''
+    }
+})();
