@@ -4,10 +4,14 @@ var fs = require("fs");
 var path = require('path');
 var app = express();
 var fruites = [
-    "Oranges",
-    "Apples",
-    "Melons",
-    "Ananas"
+  {
+    item: 'Oranges',
+    price: '10'
+  },
+  {
+    item: 'Oranges',
+    price: '10'
+  }
 ];
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -34,11 +38,14 @@ app.post('/submit', function (req, res) {
 });
 
 app.post('/fruites', function (req, res) {
-  if(req.body.fruite) {
-    fruites.push(req.body.fruite);
+  console.log(req.body.item);
+  if(req.body.item) {
+    fruites.push(req.body.item);
      console.log('add to Array');
     res.status(200).send(fruites);
-  }  
+  } else {
+    res.status(404).send('not faund');
+  }
 });
 
 app.put('/fruites/:index', function (req, res) {
@@ -89,7 +96,7 @@ app.post('/mul', function (req, res) {
   } else {
    res.status(404).send('not found');
   }
-})
+});
 
 app.post('/dif', function (req, res) {
   console.log(req.body);
@@ -100,7 +107,7 @@ app.post('/dif', function (req, res) {
   } else {
    res.status(404).send('not found');
   }
-})
+});
 
 app.post('/div', function (req, res) {
   console.log(req.body);
@@ -111,7 +118,7 @@ app.post('/div', function (req, res) {
   } else {
     res.status(404).send('not found');
   }
-})
+});
 
 var server = app.listen(3000, function () {
 var host = server.address().address;
