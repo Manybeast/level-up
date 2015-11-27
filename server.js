@@ -5,14 +5,8 @@ var fs = require("fs");
 var path = require('path');
 var app = express();
 var fruites = [
-    {
-        item: 'Oranges',
-        price: '10'
-    },
-    {
-        item: 'Oranges',
-        price: '10'
-    }
+    'oranges',
+    'apples'
 ];
 
 var comments = [
@@ -60,7 +54,7 @@ app.post('/submit', function (req, res) {
 app.post('/fruites', function (req, res) {
     console.log(req.body.item);
     if (req.body.item) {
-        fruites.push(req.body.item);
+        fruites.push(req.body.fruite);
         console.log('add to Array');
         res.status(200).send(fruites);
     } else {
@@ -136,7 +130,7 @@ app.put('/comment/:id', function (req, res) {
 
 app.delete('/comment/:index', function (req, res) {
     var index;
-    if (req.params.index && Number(req.params.index) < id) {
+    if (req.params.index) {
         setTimeout(function () {
             index = comments.indexOf(_.find(comments, function (item) {
                 return item.id === Number(req.params.index);
@@ -149,7 +143,6 @@ app.delete('/comment/:index', function (req, res) {
             }
 
             comments.splice(index, 1);
-            id--;
             res.status(200).send(comments);
         }, 1000);
 
