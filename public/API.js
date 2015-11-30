@@ -21,7 +21,7 @@ var API = (function () {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
+            debugger;
             xhr.send(JSON.stringify(data));
 
             xhr.onreadystatechange = function () { // (3)

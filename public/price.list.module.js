@@ -3,10 +3,10 @@ var PriceList = (function () {
 		var self = this;
 
 		this.items = [];
-		this.parent = document.querySelector(parentElement);
-		this.input = this.parent.querySelector('.input');
-		this.btnAdd = this.parent.querySelector('.btnAdd');
-		this.output = this.parent.querySelector('.output');
+		this.parent = $(parentElement);
+		this.input = this.parent.find('.input');
+		this.btnAdd = this.parent.find('.btnAdd');
+		this.output = this.parent.find('.output');
 
 		this.addEvents();
 		API._get('fruites', this.callback());
@@ -22,25 +22,29 @@ var PriceList = (function () {
 	};
 
 	Constructor.prototype.renderOne = function (elemText, i) {
-		var _element = document.createElement('li'),
-			_title = document.createElement('span'),
-			_btnRemove = document.createElement('span');
+		var _element = $('<li></li>'),
+			_title = $('<span></span>'),
+			_btnRemove = $('<span></span>');
 
-		_element.classList.add('item');
-		_title.innerHTML = elemText;
-		_btnRemove.innerHTML = 'delete';
-		_btnRemove.classList.add('btnRemove', 'btn');
-		_element.appendChild(_title);
-		_element.appendChild(_btnRemove);
+		_title.text(elemText);
+
+		_btnRemove
+			.text('delete')
+			.addClass('btnRemove', 'btn');
+
+		_element
+			.addClass('item')
+			.append(_title)
+			.append(_btnRemove);
 
 		return _element;
 	};
 
 	Constructor.prototype.renderAll = function () {
 		var self = this;
-		this.output.innerHTML = '';
+		this.output.text('');
 		this.items.forEach(function (item, i) {
-			self.output.appendChild(self.renderOne(item, i));
+			self.output.append(self.renderOne(item, i));
 		});
 	};
 
@@ -48,17 +52,17 @@ var PriceList = (function () {
 		var sendedData = {
 			fruite: item
 		};
-
+		debugger;
 		API._post('fruites', sendedData, this.callback());
 	};
 
 	Constructor.prototype.addEvents = function () {
 		var self = this;
-
-		this.btnAdd.addEventListener('click', function () {
+		debugger;
+		this.btnAdd.on('click', function () {
 			debugger;
-			if(self.input.value) {
-				self.sendItem(self.input.value);
+			if(self.input.val()) {
+				self.sendItem(self.input.val());
 			}
 		})
 	};
