@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax page</title>
+    <style type="text/css">
+        body {
+            height: 2000px;
+        }
+
+        li {
+            list-style: none;
+            padding:0;
+            margin:0;
+        }
+
+        .btn {
+            cursor: pointer;
+            color: #303030;
+            border: none;
+            box-shadow: 0px 2px 4px #383838;
+            padding: 10px;
+            outline: none;
+        }
+
+        .btnGet {
+            background: #0071FF;
+            transition: background 0.5s;
+            color: #FFF;
+        }
+
+        .btn:active {
+            box-shadow: 0px 1px 1px #383838;
+        }
+
+        .btnGet:hover {
+            background: #0059C8
+        }
+
+        .item {
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .input {
+            width: 150px;
+            border: none;
+            background: #FFF;
+            box-shadow: 0px 2px 4px #383838;
+            padding: 9px;
+            outline: none;
+        }
+
+        .btnRemove {
+            margin-left: 10px;
+        }
+
+        .text {
+            background: red;
+            width: 50px;
+            height: 20px;
+        }
+
+        .container {
+            border: 2px solid black;
+        }
+
+        .lights {
+            width: 200px;
+            height: 200px;
+            border: 2px solid;
+            border-radius: 50%;
+        }
+
+        .red.active {
+            background: red;
+        }
+
+        .yellow.active {
+            background: yellow;
+        }
+
+        .green.active {
+            background: green;
+        }
+
+        .form {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .el {
+            width: 40px;
+            height: 40px;
+            float: left;
+            border: 1px solid black;
+        }
+
+        #id1 {
+            background: red;;
+        }
+
+        #id2 {
+            background: green
+        }
+
+        #id3 {
+            background: blue;
+        }
+
+        #id4 {
+            background: yellow;
+        }
+
+        #id5 {
+            background: aquamarine;
+        }
+
+        .modal {
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            border: 1px solid black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="counter"></div>
+<!--<div class="form">-->
+    <!--<input class="btn btnAdd" type="button" value="add" id="addFruite"/>-->
+    <!--<input type="text" class="input">-->
+
+    <!--<div class="output"></div>-->
+<!--</div>-->
+<ul class = 'gallery'>
+    <li class="el" id="id1"></li>
+    <li class="el" id="id2"></li>
+    <li class="el" id="id3"></li>
+    <li class="el" id="id4"></li>
+    <li class="el" id="id5"></li>
+    <li class="el" id="id6"></li>
+</ul>
+<!--<script src = "/scripts.sync.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="/price.list.module.js"></script>
+<script src="/gallery.module.js"></script>
+<script src="/main.js"></script>
+</body>
+</html>

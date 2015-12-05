@@ -1,7 +1,5 @@
 var PriceList = (function () {
     function Constructor(parentElement) {
-        var self = this;
-
         this.items = [];
         this.parent = $(parentElement);
         this.input = this.parent.find('.input');
@@ -9,7 +7,7 @@ var PriceList = (function () {
         this.output = this.parent.find('.output');
 
         this.addEvents();
-        API._get('fruites', this.callback());
+
     }
 
     Constructor.prototype.callback = function () {
