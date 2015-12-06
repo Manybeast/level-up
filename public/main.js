@@ -134,4 +134,15 @@ $(document).ready(function () {
         ]
     });
 
+    var tabs = new Tabs({
+        root: '.tabs',
+        duration: 500,
+        mode: 'fadeIn'
+    });
+    var optionsTab = new Tabs({
+        root: '.options',
+        duration: 500,
+        mode: 'show'
+    });
+
 });

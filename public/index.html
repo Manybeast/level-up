@@ -3,128 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajax page</title>
-    <style type="text/css">
-        body {
-            height: 2000px;
-        }
-
-        li {
-            list-style: none;
-            padding:0;
-            margin:0;
-        }
-
-        .btn {
-            cursor: pointer;
-            color: #303030;
-            border: none;
-            box-shadow: 0px 2px 4px #383838;
-            padding: 10px;
-            outline: none;
-        }
-
-        .btnGet {
-            background: #0071FF;
-            transition: background 0.5s;
-            color: #FFF;
-        }
-
-        .btn:active {
-            box-shadow: 0px 1px 1px #383838;
-        }
-
-        .btnGet:hover {
-            background: #0059C8
-        }
-
-        .item {
-            padding: 20px;
-            cursor: pointer;
-        }
-
-        .input {
-            width: 150px;
-            border: none;
-            background: #FFF;
-            box-shadow: 0px 2px 4px #383838;
-            padding: 9px;
-            outline: none;
-        }
-
-        .btnRemove {
-            margin-left: 10px;
-        }
-
-        .text {
-            background: red;
-            width: 50px;
-            height: 20px;
-        }
-
-        .container {
-            border: 2px solid black;
-        }
-
-        .lights {
-            width: 200px;
-            height: 200px;
-            border: 2px solid;
-            border-radius: 50%;
-        }
-
-        .red.active {
-            background: red;
-        }
-
-        .yellow.active {
-            background: yellow;
-        }
-
-        .green.active {
-            background: green;
-        }
-
-        .form {
-            width: 400px;
-            margin: 0 auto;
-        }
-
-        .el {
-            width: 40px;
-            height: 40px;
-            float: left;
-            border: 1px solid black;
-        }
-
-        #id1 {
-            background: red;;
-        }
-
-        #id2 {
-            background: green
-        }
-
-        #id3 {
-            background: blue;
-        }
-
-        #id4 {
-            background: yellow;
-        }
-
-        #id5 {
-            background: aquamarine;
-        }
-
-        .modal {
-            width: 200px;
-            height: 200px;
-            background: red;
-            position: absolute;
-            border: 1px solid black;
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="counter"></div>
@@ -142,10 +21,134 @@
     <li class="el" id="id5"></li>
     <li class="el" id="id6"></li>
 </ul>
+
+<div class="tabs">
+    <ul class="tabs-controlls">
+        <li class="tab-controll active">
+            <a href = "#tab1">Tab1</a>
+        </li><li class="tab-controll">
+            <a href = "#tab2">Tab2</a>
+        </li><li class="tab-controll">
+            <a href = "#tab3">Tab3</a>
+        </li><li class="tab-controll">
+            <a href = "#tab4">Tab4</a>
+        </li>
+    </ul>
+    <div class="tabs-content">
+        <div class="tab-content active" id="tab1">tab1 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="tab2">
+            Tab2 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="tab3">Tab3 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="tab4">Tab4 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+    </div>
+</div>
+
+<div class="options">
+    <ul class="tabs-controlls">
+        <li class="tab-controll active">
+            <a href = "#option1">Option1</a>
+        </li><li class="tab-controll">
+        <a href = "#option2">option2</a>
+    </li><li class="tab-controll">
+        <a href = "#option3">option2</a>
+    </li><li class="tab-controll">
+        <a href = "#option4">option3</a>
+    </li>
+    </ul>
+    <div class="tabs-content">
+        <div class="tab-content active" id="option1">tab1 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="option2">
+            Tab2 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="option3">Tab3 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+        <div class="tab-content" id="option4">Tab4 content
+            <p>It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution of letters, as opposed to using 'Content here, content here',
+                making it look like readable English. Many desktop publishing packages and
+                web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still
+                in their infancy. Various versions have evolved over the years,
+                sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        </div>
+    </div>
+</div>
+
 <!--<script src = "/scripts.sync.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="/price.list.module.js"></script>
 <script src="/gallery.module.js"></script>
+<script src="/tabs.module.js"></script>
 <script src="/main.js"></script>
 </body>
 </html>
