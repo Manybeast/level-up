@@ -4,6 +4,7 @@
 var Tabs = (function () {
     function Tabs(config) {
         this.mode = config.mode;
+        this.root = $(config.root);
         this.duration = config.duration;
         this.controls = $(config.root).find('.tab-controll a');
         this.init();
@@ -14,7 +15,7 @@ var Tabs = (function () {
 
         this.controls.on('click', function (e) {
             debugger;
-            $($(this).attr('href'))
+            self.root.find('.' + $(this).attr('data'))
                 [self.mode](self.duration)
                 .addClass('active')
                 .siblings()
