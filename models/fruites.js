@@ -8,10 +8,15 @@ var model = {
     ],
     setItem: function (fruite) {
         this.fruites.push(fruite);
-        return fruites;
     },
     getItem: function () {
         return this.fruites;
+    },
+    updateItem: function (index, data) {
+        this.fruites.splice(index, 1, data);
+    },
+    deleteItem: function (index) {
+        this.fruites.splice(index, 1);
     }
 };
 
