@@ -19,7 +19,6 @@
     }
 
     function isValidName(str) {
-
-        return !/^[a-zA-Z]*$/.test(str);
+        return !/^[0-9]*$/.test(str);
     }
 }());

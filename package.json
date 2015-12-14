@@ -11,8 +11,16 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "chai": "^3.4.1",
     "express": "^4.13.3",
+    "istanbul": "^0.4.1",
     "lodash": "^3.10.1",
+    "mocha": "^2.3.4",
     "node-static": "^0.7.7"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4"
   }
 }
