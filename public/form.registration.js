@@ -1,25 +1,31 @@
 /**
  * Created by IlyaLitvinov on 12.12.15.
  */
-(function () {
-    var form = document.querySelector('.registration_form__wrapper'),
-        inputWrapper = form.querySelector('.input_wrapper'),
-        inputName = form.querySelector('.input_element__name'),
-        btnSubmit = form.querySelector('.btn_submit');
-
-    btnSubmit.addEventListener('click', function () {
-        if (!inputName.value || isValidName(inputName.value)) {
-            inputWrapper.classList.add('notValid');
-        } else {
-            inputWrapper.classList.remove('notValid');
-        }
-    });
-    function isValidForm() {
-
-    }
-
+var RegistrationForm = (function () {
     function isValidName(str) {
-
-        return !/^[a-zA-Z]*$/.test(str);
+        return /^[A-Za-z]*$/.test(str);
     }
-}());
+
+    function RegistrationForm() {
+        this.btnSubmit = $('.registration-form .btn__submit');
+        this.fieldName = $('.registration-form .field_input');
+        this.handleEvents();
+    }
+
+    RegistrationForm.prototype.handleEvents = function () {
+        this.btnSubmit.on('click', this.validate.bind(this))
+    };
+
+    RegistrationForm.prototype.validate = function () {
+        var value = this.fieldName.val();
+
+        if (value && isValidName(value)) {
+            this.fieldName.parent().removeClass('notValid');
+            console.log(value);
+        } else {
+            this.fieldName.parent().addClass('notValid');
+        }
+    };
+
+    return RegistrationForm;
+})();

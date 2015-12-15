@@ -3,43 +3,27 @@ body {
     font-family: Arial, Helvetica, SansSerif;
 }
 
+input {
+    border: none;
+}
+
 ul {
     padding: 0;
-    margin:0;
+    margin: 0;
 }
 
 li {
     list-style: none;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
 
 .gallery {
-    position:relative;
+    position: relative;
     display: table;
 }
-.btn {
-    cursor: pointer;
-    color: #303030;
-    border: none;
-    box-shadow: 0px 2px 4px #383838;
-    padding: 10px;
-    outline: none;
-}
 
-.btnGet {
-    background: #0071FF;
-    transition: background 0.5s;
-    color: #FFF;
-}
 
-.btn:active {
-    box-shadow: 0px 1px 1px #383838;
-}
-
-.btnGet:hover {
-    background: #0059C8
-}
 
 .item {
     padding: 20px;
@@ -132,30 +116,34 @@ li {
 /*======== tabs ========*/
 
 .tabs {
-    display:block;
+    display: block;
 }
 
 .tab-controll {
     display: inline-block;
 }
+
 .tab-controll.active a,
-.tab-content.active{
+.tab-content.active {
     background: #FFFFFF;
 }
+
 .tab-controll a {
     text-decoration: none;
-    display:inline-block;
+    display: inline-block;
     background: #f0f0f0;
     padding: 10px;
     border-bottom: none;
 }
+
 .tabs-content {
     padding: 10px;
 }
 
 .tab-content {
-    display:none;
+    display: none;
 }
+
 .tab-content.active {
     display: block;
 }
@@ -163,81 +151,149 @@ li {
 /*===== accordion ======*/
 
 .accordion, .accordion * {
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .accordion {
-    overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:3px;
-    background:#f7f7f7;
+    overflow: hidden;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    background: #f7f7f7;
 }
 
 .accordion-section-title {
-    width:100%;
-    padding:15px;
-    display:inline-block;
-    border-bottom:1px solid #1a1a1a;
-    background:#333;
-    transition:all linear 0.15s;
+    width: 100%;
+    padding: 15px;
+    display: inline-block;
+    border-bottom: 1px solid #1a1a1a;
+    background: #333;
+    transition: all linear 0.15s;
     /* Type */
-    font-size:1.200em;
-    text-shadow:0px 1px 0px #1a1a1a;
-    color:#fff;
+    font-size: 1.200em;
+    text-shadow: 0px 1px 0px #1a1a1a;
+    color: #fff;
 }
 
 .accordion-section-title.active, .accordion-section-title:hover {
-    background:#4c4c4c;
+    background: #4c4c4c;
     /* Type */
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .accordion-section:last-child .accordion-section-title {
-    border-bottom:none;
+    border-bottom: none;
 }
 
-
 .accordion-section-content {
-    padding:15px;
-    display:none;
+    padding: 15px;
+    display: none;
 }
 
 /*====SlideShow=======*/
 .container {
-    width:90%;
-    max-width:800px;
+    width: 90%;
+    max-width: 800px;
 }
+
 .slideshow {
-    display:table;
-    width:100%;
+    display: table;
+    width: 100%;
 }
+
 .slideshow_display {
     width: 80%;
     box-sizing: border-box;
-    float:right;
+    float: right;
     display: flex;
     align-items: center;
 }
+
 .slideshow_display img {
-    width:100%;
+    width: 100%;
     display: block;
 }
+
 .slideshow_list {
     margin: 0 0;
-    width:15%;
-    display:flex;
+    width: 15%;
+    display: flex;
     flex-direction: column;
 }
+
 .slideshow_item {
-    max-width:100%;
-    max-height:20%;
-    margin:10px auto;
+    max-width: 100%;
+    max-height: 20%;
+    margin: 10px auto;
     display: flex;
     align-items: center;
 }
+
 .slideshow_item img {
     width: 100%;
-    margin:0 auto;
+    margin: 0 auto;
 }
+
+/*======= Registration form ===========*/
+
+.registration-form {
+    width: 400px;
+    margin: 20px auto;
+}
+
+.field {
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.field_input {
+    padding: 5px 15px;
+    background: #cecece;
+}
+
+.field_tooltip {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.field_input:focus {
+    background: #FFF;
+}
+
+.notValid .field_tooltip {
+    display: block;
+}
+.notValid .field_input {
+    box-shadow: 0 2px 4px #8c0c00;
+}
+
+.btn {
+    cursor: pointer;
+    color: #303030;
+    border: none;
+    box-shadow: 0 2px 4px #383838;
+    padding: 10px;
+    outline: none;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.btn__submit {
+    background: #139000;
+    transition: background 0.5s;
+    color: #FFF;
+
+}
+
+.btn:active {
+    box-shadow: 0px 1px 1px #383838;
+}
+
+.btnGet:hover {
+    background: #0059C8
+}
+
