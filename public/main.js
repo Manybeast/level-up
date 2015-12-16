@@ -5,6 +5,4 @@
 
 $(document).ready(function () {
     var form = new RegistrationForm();
-
-
 });

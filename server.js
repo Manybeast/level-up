@@ -1,12 +1,12 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var fs = require("fs");
-var path = require('path');
-var routes = require('./routes/index');
-var fruites = require('./routes/fruites');
-var comments = require('./routes/comments');
-var calc = require('./routes/calc');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require("fs");
+const path = require('path');
+const routes = require('./routes/index');
+const fruites = require('./routes/fruites');
+const comments = require('./routes/comments');
+const calc = require('./routes/calc');
+const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
