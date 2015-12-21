@@ -1,0 +1,34 @@
+.jw-carousel-container {
+    width:100%;
+    background:red;
+    text-align: center;
+
+}
+.jw-carousel-container .jw-viewport {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border: 10px solid #FFF;
+    z-index: 1;
+    box-sizing: border-box;
+}
+.jw-slides {
+    display: none;
+    white-space: nowrap;
+    z-index: 1;
+    transition: all 1s;
+    /* will be added by javascript*/
+}
+.jw-slides li {
+    display:inline-block;
+    position: relative;
+    /*width:25%*/
+}
+li img {
+    width:100%;
+}
+.jw-slider-controls {
+    margin:20px;
+    color: #efefef;
+    cursor:pointer;
+}

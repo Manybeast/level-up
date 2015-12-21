@@ -7,6 +7,7 @@ $(document).ready(function () {
     var gallery,
         slideShow,
         tabs,
+        carousel,
         options;
 
     gallery = new Gallery({
@@ -22,8 +23,7 @@ $(document).ready(function () {
     slideShow = new SlideShow({
         root: ".container"
     });
-    //tabs = new Tabs('.tabs');
-    //options = new Tabs('.options');
+
     tabs = new Tabs({
         root: '.tabs',
         duration: 500,
@@ -36,19 +36,6 @@ $(document).ready(function () {
         mode: 'slideDown'
     });
 
-    function capitalize (str) {
-        return str.split(' ').map(function (item) {
-            return item[0].toUpperCase();
-        }).join('');
-    }
-    function capitalizeFor (str) {
-        var arr = [];
-
-        str.split(' ').forEach(function (item) {
-            arr.push(item[0].toUpperCase());
-        });
-
-        return arr.join('');
-    }
-
+    $('.carousel').myCarousel();
+    $('.carousel2').myCarousel();
 });
