@@ -4,72 +4,49 @@
 
 (function ($) {
     $.fn.myCarousel = function (config) {
-        var _this = $(this),
-            interval = null,
-            items = _this.find('li'),
+        var _this = this,
+            slides = _this.find('li'),
             itemsWidth = getItemsWidth(),
             carouselContainerWidth = getContainerWidth(),
-            container = null,
             currentSlide = 0,
-            speed = config.swipeSpeed || 500,
-            delay = config.swipeDelay || 4000,
-            controls;
+            controls = null,
+            container = null;
 
-        container = _this
-            .addClass('jw-slides')
-            .wrap('<div class = "jw-viewport"></div>')
-            .parent()
-            .wrap($('<div></div>', {
-                class: 'jw-carousel-container'
-            })).parent();
+        container = _this.addClass('jw-slides').wrap('<div class = "jw-viewport"></div>').css({
+            width: carouselContainerWidth + '%',
+            display: 'table',
+            transition: 'all ' + 500 + 'ms'
+        }).parent().wrap($('<div></div>', {
+            class: 'jw-carousel-container'
+        })).parent();
 
-        controls = _this.parent().append('<div>' +
+        controls = container.parent().append('<div>' +
             '<a data = "prev" class = "jw-slider-controls">prev</a>' +
             '<a data = "next" class = "jw-slider-controls">next</a>' +
             '</div>').find('a');
 
-        $(items).css({
+        $(slides).css({
             width: itemsWidth + '%'
         });
 
-        _this.css({
-            width: carouselContainerWidth + '%',
-            display: 'table',
-            transition: 'all ' + speed + 'ms'
-        });
+        function getItemsWidth() {
+            return 100 / slides.length;
+        }
+
+        function getContainerWidth() {
+            return 100 * slides.length;
+        }
 
         function nextSlide() {
-            if(currentSlide < items.length-1) {
+            console.log('Next');
+            if(currentSlide < slides.length-1) {
                 currentSlide++;
+                console.log(itemsWidth * currentSlide);
                 moveSlide('-' + itemsWidth * currentSlide + '%');
             } else {
                 currentSlide = 0;
                 moveSlide('-' + itemsWidth * currentSlide + '%');
             }
-        }
-
-        function prevSlide() {
-            if(currentSlide > 0) {
-                currentSlide--;
-                moveSlide('-' + itemsWidth * currentSlide + '%');
-            }
-        }
-
-        function moveSlide(nextSlide) {
-            _this.css({
-                transform: 'translateX(' + nextSlide + ')',
-                MozTransform: 'translateX(-' + nextSlide + ')',
-                WebkitTransform: 'translateX(-' + nextSlide + ')',
-                msTransform: 'translateX(-' + nextSlide + ')'
-            });
-        }
-
-        function getItemsWidth() {
-            return 100 / items.length;
-        }
-
-        function getContainerWidth() {
-            return 100 * items.length;
         }
 
         function handleEvents() {
@@ -78,28 +55,18 @@
                 nextSlide();
             });
 
-            $(controls[0]).on('click', function (e) {
-                e.preventDefault();
-                prevSlide();
+        }
+
+        function moveSlide(nextSlide) {
+            _this.css({
+                transform: 'translateX(' + nextSlide + ')',
+                MozTransform: 'translateX(' + nextSlide + ')',
+                WebkitTransform: 'translateX(' + nextSlide + ')',
+                msTransform: 'translateX(' + nextSlide + ')'
             });
-
-            $(container).on('mouseenter', function () {
-                clearInterval(interval);
-            }).on('mouseleave', function () {
-                startInterval();
-            })
-
         }
 
-        function startInterval () {
-            interval = setInterval(nextSlide, delay);
-        }
+        handleEvents();
 
-        function sliderInit () {
-            startInterval();
-            handleEvents();
-        }
-
-        sliderInit();
     };
 })(window.jQuery);
