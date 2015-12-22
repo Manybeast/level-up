@@ -36,6 +36,12 @@ $(document).ready(function () {
         mode: 'slideDown'
     });
 
-    $('.carousel').myCarousel();
-    $('.carousel2').myCarousel();
+    $('.carousel').myCarousel({
+        swipeSpeed: 300,
+        swipeDelay: 10000
+    });
+    $('.carousel2').myCarousel({
+        swipeSpeed: 1000,
+        swipeDelay: 5000
+    });
 });

@@ -16,7 +16,7 @@
     display: none;
     white-space: nowrap;
     z-index: 1;
-    transition: all 1s;
+
     /* will be added by javascript*/
 }
 .jw-slides li {
