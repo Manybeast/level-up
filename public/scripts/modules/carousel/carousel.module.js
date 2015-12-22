@@ -5,6 +5,7 @@
 (function ($) {
     $.fn.myCarousel = function (config) {
         var _this = $(this),
+            interval = null,
             items = _this.find('li'),
             itemsWidth = getItemsWidth(),
             carouselContainerWidth = getContainerWidth(),
@@ -24,16 +25,6 @@
             '<a data = "next" class = "jw-slider-controls">next</a>' +
             '</div>').find('a');
 
-        $(controls[1]).on('click', function (e) {
-            e.preventDefault();
-            nextSlide();
-        });
-
-        $(controls[0]).on('click', function (e) {
-            e.preventDefault();
-            prevSlide();
-        });
-
         $(items).css({
             width: itemsWidth + '%'
         });
@@ -43,14 +34,20 @@
             display: 'table'
         });
 
+        handleEvents();
+
         function nextSlide() {
-            currentSlide++;
-            moveSlide('-' + itemsWidth * currentSlide + '%')
+            if(currentSlide < items.length-1) {
+                currentSlide++;
+                moveSlide('-' + itemsWidth * currentSlide + '%')
+            }
         }
 
         function prevSlide() {
-            currentSlide--;
-            moveSlide('+' + itemsWidth * currentSlide + '%')
+            if(currentSlide > 0) {
+                currentSlide--;
+                moveSlide('-' + itemsWidth * currentSlide + '%');
+            }
         }
 
         function moveSlide(nextSlide) {
@@ -68,6 +65,26 @@
 
         function getContainerWidth() {
             return 100 * items.length;
+        }
+
+        function handleEvents() {
+            $(controls[1]).on('click', function (e) {
+                e.preventDefault();
+                nextSlide();
+            });
+
+            $(controls[0]).on('click', function (e) {
+                e.preventDefault();
+                prevSlide();
+            });
+        }
+
+        //function startInterval () {
+        //    interval = setInterval()
+        //}
+
+        function sliderInit () {
+
         }
     };
 })(window.jQuery);
