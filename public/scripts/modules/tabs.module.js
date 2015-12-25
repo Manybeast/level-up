@@ -6,69 +6,37 @@
  *  root: root html element's class
  * }
  */
-var Tabs = function (root) {
-    var _root = $(root);
 
-    function init() {
-        _root
-            .find('.tab-controll a')
-            .on('click', function (e) {
-                e.preventDefault();
-                var target = $(this).attr('data');
 
-                _root
-                    .find('.' + target)
-                    .fadeIn()
-                    .addClass('active')
-                    .siblings()
-                    .removeClass('active')
-                    .hide();
-
-                $(this)
-                    .parent()
-                    .addClass('active')
-                    .siblings()
-                    .removeClass('active');
-
-            });
+var Tabs = (function () {
+    function Tabs(config) {
+        this.mode = config.mode;
+        this.root = $(config.root);
+        this.duration = config.duration;
+        this.controls = $(config.root).find('.tab-controll a');
+        this.init();
     }
 
-    init();
+    Tabs.prototype.init = function () {
+        var self = this;
 
-    return this;
-};
+        this.controls.on('click', function (e) {
+            $(this)
+                .parent('li')
+                .addClass('active')
+                .siblings()
+                .removeClass('active');
 
+            self.root.find('.' + $(this).attr('data'))
+                [self.mode](self.duration)
+                .addClass('active')
+                .siblings()
+                .removeClass('active')
+                .hide();
 
-//
-//var Tabs = (function () {
-//    function Tabs(config) {
-//        this.mode = config.mode;
-//        this.root = $(config.root);
-//        this.duration = config.duration;
-//        this.controls = $(config.root).find('.tab-controll a');
-//        this.init();
-//    }
-//
-//    Tabs.prototype.init = function () {
-//        var self = this;
-//
-//        this.controls.on('click', function (e) {
-//            $(this)
-//                .parent('li')
-//                .addClass('active')
-//                .siblings()
-//                .removeClass('active');
-//
-//            self.root.find('.' + $(this).attr('data'))
-//                [self.mode](self.duration)
-//                .addClass('active')
-//                .siblings()
-//                .removeClass('active')
-//                .hide();
-//
-//            e.preventDefault();
-//        });
-//    };
-//
-//    return Tabs;
-//})();
+            e.preventDefault();
+        });
+    };
+
+    return Tabs;
+})();

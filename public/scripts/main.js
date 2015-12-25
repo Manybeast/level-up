@@ -37,11 +37,13 @@ $(document).ready(function () {
     });
 
     $('.carousel').myCarousel({
-        swipeSpeed: 300,
-        swipeDelay: 10000
+        swipeSpeed: 1000,
+        swipeDelay: 4000,
+        pager: true
     });
     $('.carousel2').myCarousel({
         swipeSpeed: 1000,
-        swipeDelay: 5000
+        swipeDelay: 5000,
+        pager: false
     });
 });

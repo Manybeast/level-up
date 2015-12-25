@@ -5,63 +5,99 @@
 (function ($) {
     $.fn.myCarousel = function (config) {
         var _this = $(this),
-            interval = null,
             items = _this.find('li'),
             itemsWidth = getItemsWidth(),
             carouselContainerWidth = getContainerWidth(),
-            container = null,
-            currentSlide = 0,
             speed = config.swipeSpeed || 500,
             delay = config.swipeDelay || 4000,
+            currentSlide = 0,
+            isPager = config.pager,
+            container = null,
+            interval = null,
+            pagerItems = null,
             controls;
 
-        container = _this
-            .addClass('jw-slides')
-            .wrap('<div class = "jw-viewport"></div>')
-            .parent()
-            .wrap($('<div></div>', {
-                class: 'jw-carousel-container'
-            })).parent();
+        function create() {
+            container = _this
+                .addClass('jw-slides')
+                .wrap('<div class = "jw-viewport"></div>')
+                .parent()
+                .wrap($('<div></div>', {
+                    class: 'jw-carousel-container'
+                })).parent();
 
-        controls = _this.parent().append('<div>' +
-            '<a data = "prev" class = "jw-slider-controls">prev</a>' +
-            '<a data = "next" class = "jw-slider-controls">next</a>' +
-            '</div>').find('a');
+            controls = _this.parent().append('<div class = "jw-slider-controls">' +
+                '<a data = "prev" class = "jw-slider-control jw-slider-control_prev"></a>' +
+                '<a data = "next" class = "jw-slider-control jw-slider-control_next"></a>' +
+                '</div>').find('a');
 
-        $(items).css({
-            width: itemsWidth + '%'
-        });
+            $(items).css({
+                width: itemsWidth + '%'
+            });
 
-        _this.css({
-            width: carouselContainerWidth + '%',
-            display: 'table',
-            transition: 'all ' + speed + 'ms'
-        });
+            _this.css({
+                width: carouselContainerWidth + '%',
+                display: 'table',
+                transition: 'all ' + speed + 'ms'
+            });
+
+            if(isPager) {
+                createPager();
+            }
+        }
+
+        function createPager() {
+            var pager = $('<div class = "jw-slider-pager"></div>');
+
+            $(items).each(function (i, item) {
+                var pagerItem = $('<div></div>', {
+                    class: 'jw-slider-pager-item'
+                }).append($('<a></a>', {
+                    class: 'jw-slider-pager-link',
+                    'data-slide-index': i
+                }));
+                $(pagerItem).appendTo(pager);
+            });
+
+            $(pager).appendTo(_this.parent());
+            pagerItems = pager.find('a');
+        }
 
         function nextSlide() {
-            if(currentSlide < items.length-1) {
+            if (currentSlide < items.length - 1) {
                 currentSlide++;
-                moveSlide('-' + itemsWidth * currentSlide + '%');
+
+                moveSlide();
             } else {
                 currentSlide = 0;
-                moveSlide('-' + itemsWidth * currentSlide + '%');
+
+                moveSlide();
             }
         }
 
         function prevSlide() {
-            if(currentSlide > 0) {
+            if (currentSlide > 0) {
                 currentSlide--;
                 moveSlide('-' + itemsWidth * currentSlide + '%');
             }
         }
 
-        function moveSlide(nextSlide) {
+        function showSlide(number) {
+            currentSlide = number;
+            moveSlide();
+        }
+
+        function moveSlide() {
+            var slidePosition = '-' + itemsWidth * currentSlide + '%';
+
             _this.css({
-                transform: 'translateX(' + nextSlide + ')',
-                MozTransform: 'translateX(-' + nextSlide + ')',
-                WebkitTransform: 'translateX(-' + nextSlide + ')',
-                msTransform: 'translateX(-' + nextSlide + ')'
+                transform: 'translateX(' + slidePosition + ')',
+                MozTransform: 'translateX(-' + slidePosition + ')',
+                WebkitTransform: 'translateX(-' + slidePosition + ')',
+                msTransform: 'translateX(-' + slidePosition + ')'
             });
+
+            filterActiveItem();
         }
 
         function getItemsWidth() {
@@ -87,17 +123,45 @@
                 clearInterval(interval);
             }).on('mouseleave', function () {
                 startInterval();
+            });
+
+            $(pagerItems).on('click', function () {
+                if(isPager) {
+                    activatePagerItem($(this).parent());
+                }
+                showSlide($(this).attr('data-slide-index'));
             })
 
         }
 
-        function startInterval () {
+        function filterActiveItem () {
+            var active = null;
+
+            $(pagerItems).each(function (i, item) {
+                if ($(item).attr('data-slide-index') == currentSlide) {
+                    active = item;
+                }
+            });
+
+            activatePagerItem($(active).parent());
+        }
+
+        function activatePagerItem (that) {
+            $(that)
+                .addClass('active')
+                .siblings()
+                .removeClass('active');
+        }
+
+        function startInterval() {
             interval = setInterval(nextSlide, delay);
         }
 
-        function sliderInit () {
+        function sliderInit() {
+            create();
             startInterval();
             handleEvents();
+            filterActiveItem();
         }
 
         sliderInit();

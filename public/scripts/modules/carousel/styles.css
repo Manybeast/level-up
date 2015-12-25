@@ -1,9 +1,9 @@
 .jw-carousel-container {
-    width:100%;
-    background:red;
+    width: 100%;
+    background: red;
     text-align: center;
-
 }
+
 .jw-carousel-container .jw-viewport {
     width: 100%;
     position: relative;
@@ -12,6 +12,7 @@
     z-index: 1;
     box-sizing: border-box;
 }
+
 .jw-slides {
     display: none;
     white-space: nowrap;
@@ -19,16 +20,83 @@
 
     /* will be added by javascript*/
 }
+
 .jw-slides li {
-    display:inline-block;
+    display: inline-block;
     position: relative;
     /*width:25%*/
 }
+
 li img {
-    width:100%;
+    width: 100%;
+    margin-bottom:-10px;
 }
+
 .jw-slider-controls {
-    margin:20px;
-    color: #efefef;
-    cursor:pointer;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -0.5em;
 }
+
+.jw-slider-control {
+    margin: 20px;
+    opacity: 0;
+    color: #efefef;
+    cursor: pointer;
+    background: url('./images/controls.png') no-repeat;
+    width: 32px;
+    height: 32px;
+    transition: opacity 1s;
+}
+
+.jw-carousel-container:hover .jw-slider-control {
+    opacity: 0.8;
+}
+
+.jw-slider-control_next {
+    float: right;
+    background-position: -43px -32px;
+}
+
+.jw-slider-control_next:hover {
+    background-position: -43px 0 ;
+}
+
+.jw-slider-control_prev {
+    float: left;
+    background-position:  0 -32px;;
+}
+
+.jw-slider-control_prev:hover {
+    float: left;
+    background-position: 0 0;
+}
+.jw-slider-pager {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+.jw-slider-pager-item {
+    display: inline-block;
+}
+.jw-slider-pager-link {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    opacity: 0.4;
+    display:inline-block;
+    cursor: pointer;
+    margin:6px;
+    transition: opacity 0.5s;
+}
+.jw-slider-pager-link:hover {
+    opacity: 0.8;
+}
+.jw-slider-pager-item.active .jw-slider-pager-link{
+    opacity:0.8;
+}
+
+
