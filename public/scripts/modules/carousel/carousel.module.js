@@ -130,8 +130,16 @@
                     activatePagerItem($(this).parent());
                 }
                 showSlide($(this).attr('data-slide-index'));
-            })
+            });
 
+            $(container).on('touchstart', function (e) {
+                e.preventDefault();
+               console.log(e);
+            });
+
+            $(container).on('mousedown', function (e) {
+
+            });
         }
 
         function filterActiveItem () {
