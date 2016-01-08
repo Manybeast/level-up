@@ -1,3 +1,6 @@
+.container {
+    margin:10px;
+}
 .jw-carousel-container {
     width: 100%;
     background: red;
@@ -97,6 +100,24 @@ li img {
 }
 .jw-slider-pager-item.active .jw-slider-pager-link{
     opacity:0.8;
+}
+
+.jw-slides-fade {
+    box-sizing: border-box;
+    position: relative;
+    display:table-cell;
+}
+
+.jw-slides-fade li {
+    position: absolute;
+    top:0;
+    left:0;
+}
+.jw-slides-fade li {
+    opacity: 0;
+}
+.jw-slides-fade li.active {
+    opacity: 1;
 }
 
 

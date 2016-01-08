@@ -41,7 +41,7 @@ $(document).ready(function () {
         swipeDelay: 4000,
         pager: true
     });
-    $('.carousel2').myCarousel({
+    $('.carousel2').fadeCarousel({
         swipeSpeed: 1000,
         swipeDelay: 5000,
         pager: false

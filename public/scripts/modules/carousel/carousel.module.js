@@ -70,11 +70,9 @@
         function nextSlide() {
             if (currentSlide < items.length - 1) {
                 currentSlide++;
-
                 moveSlide();
             } else {
                 currentSlide = 0;
-
                 moveSlide();
             }
         }
@@ -138,32 +136,35 @@
 
             $(container).on('touchstart', function (e) {
                 e.preventDefault();
-                console.log(e);
+                clearInterval(interval);
+                touchStarted(e);
+            });
+
+            $(container).on('touchend', function (e) {
+                e.preventDefault();
+                touchEnded(e);
+                startInterval();
             });
 
             //event for mouse cursor swipe
             $(container).on('mousedown', function (e) {
                 e.preventDefault();
                 touchStarted(e);
-                $(container).on('mousemove', function (e) {
-                    console.log(e.pageX);
-                });
             });
 
             $(container).on('mouseup', function (e) {
                 touchEnded(e);
-                $(container).off('mousemove');
             });
         }
 
         function touchStarted(event) {
-            touchCoordinates.touchStart = event.pageX;
+            touchCoordinates.touchStart = (event.originalEvent.touches) ? event.originalEvent.changedTouches[0].pageX : event.pageX;
         }
 
         function touchEnded(event) {
-            touchCoordinates.touchEnd = (event.touches) ? event.changedTouches[0].pageX : event.pageX;
+            touchCoordinates.touchEnd = (event.originalEvent.touches) ? event.originalEvent.changedTouches[0].pageX : event.pageX;
             if (touchCoordinates.touchStart > touchCoordinates.touchEnd) {
-               nextSlide();
+                nextSlide();
             } else {
                 prevSlide();
             }
@@ -202,4 +203,68 @@
 
         sliderInit();
     };
+
+
+    $.fn.fadeCarousel = function (config) {
+        var _this = $(this),
+            items = _this.find('li'),
+            container = null,
+            height = items.find('img').height(),
+            itemsWidth = getItemsWidth(),
+            currentSlide = 0,
+            controls;
+
+
+        function create() {
+            container = _this
+                .height(height)
+                .addClass('jw-slides jw-slides-fade')
+                .wrap($('<div></div>', {
+                    class: 'jw-carousel-container'
+                })).parent();
+
+            $(items).css({
+                width: '100%',
+                transition: 'all ' + 500 + 'ms'
+            });
+
+            _this.css({
+                width: '100%',
+                display: 'table'
+            });
+
+            $(items[currentSlide]).addClass('active');
+        }
+
+        function getItemsWidth() {
+            return 100 / items.length;
+        }
+
+        function handleEvents() {
+            $(container).on('click', function (e) {
+                showSlide();
+            });
+        }
+
+        function showSlide() {
+            console.log(currentSlide);
+            items.removeClass('active');
+
+            if (currentSlide < items.length-1) {
+                currentSlide++;
+                $(items[currentSlide])
+                    .addClass('active');
+
+            } else {
+                currentSlide = 0;
+                $(items[currentSlide])
+                    .addClass('active');
+
+            }
+        }
+
+        create();
+        handleEvents();
+    };
+
 })(window.jQuery);
