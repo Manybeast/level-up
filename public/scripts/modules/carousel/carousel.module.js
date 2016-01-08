@@ -12,14 +12,14 @@
             delay = config.swipeDelay || 4000,
             currentSlide = 0,
             isPager = config.pager,
-            container = null,
-            interval = null,
-            pagerItems = null,
             touchCoordinates = {
                 touchStart: null,
                 touchEnd: null
             },
-            controls;
+            container = null,
+            interval = null,
+            pagerItems = null,
+            controls = null;
 
         function create() {
             container = _this
@@ -70,6 +70,7 @@
         function nextSlide() {
             if (currentSlide < items.length - 1) {
                 currentSlide++;
+                console.log(currentSlide);
                 moveSlide();
             } else {
                 currentSlide = 0;
@@ -80,6 +81,7 @@
         function prevSlide() {
             if (currentSlide > 0) {
                 currentSlide--;
+                console.log(currentSlide);
                 moveSlide('-' + itemsWidth * currentSlide + '%');
             }
         }
@@ -135,13 +137,11 @@
             });
 
             $(container).on('touchstart', function (e) {
-                e.preventDefault();
                 clearInterval(interval);
                 touchStarted(e);
             });
 
             $(container).on('touchend', function (e) {
-                e.preventDefault();
                 touchEnded(e);
                 startInterval();
             });
@@ -149,10 +149,16 @@
             //event for mouse cursor swipe
             $(container).on('mousedown', function (e) {
                 e.preventDefault();
+                if (e.target.classList.contains('jw-slider-control')) {
+                    return false;
+                }
                 touchStarted(e);
             });
 
             $(container).on('mouseup', function (e) {
+                if (e.target.classList.contains('jw-slider-control')) {
+                    return false;
+                }
                 touchEnded(e);
             });
         }
@@ -169,7 +175,6 @@
                 prevSlide();
             }
         }
-
 
         function filterActiveItem() {
             var active = null;
@@ -250,7 +255,7 @@
             console.log(currentSlide);
             items.removeClass('active');
 
-            if (currentSlide < items.length-1) {
+            if (currentSlide < items.length - 1) {
                 currentSlide++;
                 $(items[currentSlide])
                     .addClass('active');
