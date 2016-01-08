@@ -15,6 +15,10 @@
             container = null,
             interval = null,
             pagerItems = null,
+            touchCoordinates = {
+                touchStart: null,
+                touchEnd: null
+            },
             controls;
 
         function create() {
@@ -41,7 +45,7 @@
                 transition: 'all ' + speed + 'ms'
             });
 
-            if(isPager) {
+            if (isPager) {
                 createPager();
             }
         }
@@ -126,7 +130,7 @@
             });
 
             $(pagerItems).on('click', function () {
-                if(isPager) {
+                if (isPager) {
                     activatePagerItem($(this).parent());
                 }
                 showSlide($(this).attr('data-slide-index'));
@@ -134,15 +138,39 @@
 
             $(container).on('touchstart', function (e) {
                 e.preventDefault();
-               console.log(e);
+                console.log(e);
             });
 
+            //event for mouse cursor swipe
             $(container).on('mousedown', function (e) {
+                e.preventDefault();
+                touchStarted(e);
+                $(container).on('mousemove', function (e) {
+                    console.log(e.pageX);
+                });
+            });
 
+            $(container).on('mouseup', function (e) {
+                touchEnded(e);
+                $(container).off('mousemove');
             });
         }
 
-        function filterActiveItem () {
+        function touchStarted(event) {
+            touchCoordinates.touchStart = event.pageX;
+        }
+
+        function touchEnded(event) {
+            touchCoordinates.touchEnd = (event.touches) ? event.changedTouches[0].pageX : event.pageX;
+            if (touchCoordinates.touchStart > touchCoordinates.touchEnd) {
+               nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+
+
+        function filterActiveItem() {
             var active = null;
 
             $(pagerItems).each(function (i, item) {
@@ -154,7 +182,7 @@
             activatePagerItem($(active).parent());
         }
 
-        function activatePagerItem (that) {
+        function activatePagerItem(that) {
             $(that)
                 .addClass('active')
                 .siblings()
