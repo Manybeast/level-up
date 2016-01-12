@@ -4,5 +4,5 @@
  */
 
 $(document).ready(function () {
-    var form = new RegistrationForm();
+    $('.registration-form').commentForm();
 });
