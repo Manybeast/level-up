@@ -2,38 +2,35 @@
  * Created by IlyaLitvinov on 12.12.15.
  */
 
-    $.fn.commentForm = function () {
-        console.log('Hello world');
-        console.log(this);
-        $.ajax({
-            url: '/comment',
-            method: 'GET',
-            success: function (data) {
-                console.log('Finish!');
-                console.log(data);
-            }
-        });
-        $.ajax({
-            url: '/comment',
-            method: 'POST',
-            data: {
-                "author": "Test Jones",
-                "text": "youText"
+function CommentForm (parent) {
+    var _parent = document.querySelector(parent),
+        content = _parent.querySelector('.content'),
+        comments = [
+            {
+                text: 'test',
+                author: 'Author',
+                date: '13/01/2016'
             },
-            success: function (data) {
-                console.log('POST Request!');
-                console.log(data);
+            {
+                text: 'test',
+                author: 'Author',
+                date: '13/01/2016'
             }
-        });
-        $.ajax({
-            url: '/fruites',
-            method: 'POST',
-            data:{
-                fruite: 'KIWI'
-            },
-            success: function (data) {
-                console.log('POST Request!');
-                console.log(data);
-            }
-        });
-    };
+        ];
+
+    function renderOne (commentObject) {
+        var container = document.createElement('li'),
+            template  = '<div class="comment"><div class="comment-text">'
+                + commentObject.text
+                +'</div><div class="author"><div class="name">'
+                + commentObject.name
+                + '</div> <div class="date">'
+                + commentObject.date +'</div></div></div>';
+
+        container.innerHTML = template;
+        content.appendChild(container);
+    }
+
+    renderOne(comments[0]);
+
+};
