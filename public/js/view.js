@@ -48,10 +48,11 @@
         //разделение "каналов" событий
         if (event === 'addItem') {
             bindCustomEvents(self.input, 'blur keypress', function (e) {
+                var title = self.input.val();
 
                 //навешевание слбытия на клавишу enter code = 13
-                if(e.which === 13 || e.type === 'blur') {
-                    handler(self.input.val());
+                if((e.which === 13 || e.type === 'blur') && title) {
+                    handler(title);
                     self.input.val('');
                 }
             });
