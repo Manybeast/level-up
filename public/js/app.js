@@ -7,7 +7,6 @@ console.log(app);
     //Точка входа в приложение в этом месте инициализируются все сущности,
     //происходит первоначальное конфигурирование приложения
     function App () {
-        console.log(app);
         this.model = new app.Model();
         this.view = new app.View();
         this.controller = new app.Controller(this.model, this.view);

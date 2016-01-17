@@ -8,10 +8,20 @@
         this.view = view;
         this.model = model;
 
-        this.view.bind('testEvent', function (e) {
-            self.view.render( self.model.getTest());
+        //Первоначальная отрисовка списка
+
+        this.view.bind('addItem', function (title) {
+            debugger;
+            self.model.setItem(title);
+            self.show();
         });
+
+        this.show();
     }
+
+    Controller.prototype.show = function () {
+        this.view.render(this.model.getAll());
+    };
 
 
     window.app = window.app || {};
