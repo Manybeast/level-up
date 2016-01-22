@@ -1,7 +1,7 @@
 /**
  * Created by IlyaLitvinov on 14.01.16.
  */
-(function (window) {
+/*(function (window) {
     function Model() {
         this.test = 'test';
         this.items = [{
@@ -37,4 +37,24 @@
 
     window.app = window.app || {};
     window.app.Model = Model;
-})(window);
+})(window);*/
+
+
+var Model = (function () {
+    function Model() {
+        console.log('Model!');
+
+        this.items = [{
+                id: 0,
+                title: "Test",
+                completed: true
+        },
+            {
+                id: 1,
+                title: "Test2",
+                completed: false
+        }
+    ]
+    }
+    return Model;
+})();

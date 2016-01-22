@@ -2,7 +2,7 @@
  * Created by IlyaLitvinov on 14.01.16.
  */
 //globals observer app
-(function (window) {
+/*(function (window) {
     function View() {
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
@@ -66,4 +66,14 @@
 
     window.app = window.app || {};
     window.app.View = View;
-})(window);
+})(window);*/
+
+var View = (function () {
+    function View() {
+        console.log('View!');
+        this.activeBtn = $('#active');
+        this.input = $('.new-todo');
+        this.output = $('.todo-list');
+    }
+    return View;
+})();

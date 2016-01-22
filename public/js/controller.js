@@ -1,7 +1,7 @@
 /**
  * Created by IlyaLitvinov on 14.01.16.
  */
-(function (window) {
+/*(function (window) {
     function Controller (model, view) {
         var self = this;
 
@@ -26,4 +26,16 @@
 
     window.app = window.app || {};
     window.app.Controller = Controller;
-})(window);
+})(window);*/
+
+
+var Controller = (function () {
+    function Controller() {
+        console.log('Controller!');
+    }
+
+    Controller.prototype.show = function () {
+        this.view.render(this.model.getAll());
+    };
+    return Controller;
+})();
