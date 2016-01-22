@@ -1,16 +1,17 @@
 /**
  * Created by IlyaLitvinov on 14.01.16.
  */
-console.log(app);
+console.log(TodoList);
 (function () {
 
     //Точка входа в приложение в этом месте инициализируются все сущности,
     //происходит первоначальное конфигурирование приложения
-    function App () {
-        this.model = new app.Model();
-        this.view = new app.View();
-        this.controller = new app.Controller(this.model, this.view);
+    function TodoListApplication () {
+        this.model = new TodoList.Model();
+        this.view = new TodoList.View();
+        this.controller = new TodoList.Controller(this.model, this.view);
     }
 
-    var application = new App();
+    var application = new TodoListApplication();
+    console.log(application);
 })();
