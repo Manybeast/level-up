@@ -1,40 +1,36 @@
-/**
- * Created by IlyaLitvinov on 14.01.16.
- */
-(function (window) {
-    function Model() {
-        this.test = 'test';
+var Model = (function () {
+    function Model () {
         this.items = [{
-            id: 0,
-            title: "Test",
-            completed: true
-        },
+                id: 0,
+                title: 'test',
+                complited: true
+            },
             {
-                id: 1,
-                title: "Test2",
-                completed: false
+                id:1,
+                title: 'test2',
+                complited: false
             }
-        ]
+        ];
+        console.log('init Model');
+    }
+
+    function generateId () {
+        return Math.floor((1 + Math.random()) * 0x10000);
     }
 
     Model.prototype.getAll = function () {
         return this.items;
     };
 
-    Model.prototype.setItem = function (itemTitle) {
+    Model.prototype.setItem = function () {
         var model = {
             id: generateId(),
             title: itemTitle,
-            completed: false
+            complited: false
         };
-
+        
         this.items.push(model);
     };
 
-    function generateId() {
-        return Math.floor((1 + Math.random()) * 0x10000);
-    }
-
-    window.app = window.app || {};
-    window.app.Model = Model;
-})(window);
+    return Model;
+})();
