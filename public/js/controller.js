@@ -1,5 +1,6 @@
 var Controller = (function () {
     function Controller (model, view) {
+
         var self = this;
 
         console.log('init Controller');

@@ -22,7 +22,7 @@ var View = (function () {
         //Шаблон для отрисовки одного элемента списка
         var defaultTemplate = '<li data-id="{{id}}" class="{{complited}}">'
             + '<div class="view">'
-            + '<input class="toggle" type="checkbox" {{checked}}>'
+            + '<input class="toggle" type="chekbox" {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
@@ -32,7 +32,6 @@ var View = (function () {
        templ = templ.replace('{{complited}}', item.complited);
        templ = templ.replace('{{checked}}', item.checked);
        templ = templ.replace('{{title}}', item.title);
-
        this.view = this.view + templ;
     };
 
