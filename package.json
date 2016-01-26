@@ -16,7 +16,8 @@
     "istanbul": "^0.4.1",
     "lodash": "^3.10.1",
     "mocha": "^2.3.4",
-    "node-static": "^0.7.7"
+    "node-static": "^0.7.7",
+    "react": "^0.14.6"
   },
   "devDependencies": {
     "chai": "^3.4.1",
