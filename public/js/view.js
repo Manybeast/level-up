@@ -29,11 +29,11 @@
                 + '<button class="destroy"></button>'
                 + '</div>'
                 + '</li>',
-            template = defaultTemplate.replace('{{id}}', item.id);
+            template = defaultTemplate.replace('{{id}}', toDoItem.id);
 
-        template = template.replace('{{completed}}', item.completed);
-        template = template.replace('{{checked}}', item.checked);
-        template = template.replace('{{title}}', item.title);
+        template = template.replace('{{completed}}', toDoItem.completed);
+        template = template.replace('{{checked}}', toDoItem.checked);
+        template = template.replace('{{title}}', toDoItem.title);
 
         this.view = this.view + template;
     };
