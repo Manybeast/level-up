@@ -4,6 +4,7 @@ var Controller = (function () {
         this.view = view;
         this.model = model;
 
+        //Первоначальная отрисовка списка
         this.show();
     }
 

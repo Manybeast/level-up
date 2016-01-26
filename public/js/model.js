@@ -1,8 +1,8 @@
-var Model = (function () {
-    function Model () {
+var Model = (function (){
+    function Model() {
         this.items = [{
                 id: 0,
-                title: 'test',
+                title: "Test",
                 complited: true
             },
             {
@@ -28,7 +28,7 @@ var Model = (function () {
             title: itemTitle,
             complited: false
         };
-        
+
         this.items.push(model);
     };
 
