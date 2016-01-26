@@ -1,11 +1,7 @@
-/**
- * Created by IlyaLitvinov on 14.01.16.
- */
-//globals observer app
-
 var View = (function () {
     function View () {
         console.log('View');
+
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
@@ -19,32 +15,38 @@ var View = (function () {
             self.renderOne(item);
         });
 
-        debugger;
-        this.output.html(this.view);
-    };
+       this.output.html(this.view);
+   };
 
     View.prototype.renderOne = function (item) {
         //Шаблон для отрисовки одного элемента списка
-        var defaultTemplate =  '<li data-id="{{id}}" class="{{completed}}">'
+        var defaultTemplate = '<li data-id="{{id}}" class="{{complited}}">'
             + '<div class="view">'
             + '<input class="toggle" type="checkbox" {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
             + '</li>',
-            template = defaultTemplate.replace('{{id}}', item.id);
+            templ = defaultTemplate.replace('{{id}}', item.id);
 
-        template = template.replace('{{completed}}', item.completed);
-        template = template.replace('{{checked}}', item.checked);
-        template = template.replace('{{title}}', item.title);
+       templ = templ.replace('{{complited}}', item.complited);
+       templ = templ.replace('{{checked}}', item.checked);
+       templ = templ.replace('{{title}}', item.title);
 
-        this.view = this.view + template;
+       this.view = this.view + templ;
     };
 
+    View.prototype.addChanels = function (chenallName, handler) {
+        var self = this;
 
-    function bindCustomEvents(target, type, callback) {
-        target.on(type, callback);
-    }
+        if (chenallName === 'addItem') {
+            this.input.on('keypress', function (e) {
+                if (e.which ===13) {
+                    handler($(this).val());
+                }
+            });
+        }
+    };
 
     return View;
 })();
