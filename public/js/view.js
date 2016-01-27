@@ -22,7 +22,7 @@ var View = (function () {
         //Шаблон для отрисовки одного элемента списка
         var defaultTemplate = '<li data-id="{{id}}" class="{{complited}}">'
             + '<div class="view">'
-            + '<input class="toggle" type="chekbox" {{checked}}>'
+            + '<input class="toggle" type="checkbox" {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
