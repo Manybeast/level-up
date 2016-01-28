@@ -3,14 +3,14 @@ var Model = (function (){
         this.items = [{
                 id: 0,
                 title: "Test",
-                complited: true,
+                complited: 'complited',
                 checked: 'checked'
             },
             {
                 id:1,
                 title: 'test2',
-                complited: false,
-                checked: false
+                complited: '',
+                checked: ''
             }
         ];
         console.log('init Model');
@@ -28,9 +28,11 @@ var Model = (function (){
         var model = {
             id: generateId(),
             title: itemTitle,
-            complited: false,
-            checked: false
+            complited: '',
+            checked: ''
         };
+        
+        this.view.complited(model.id);
 
         this.items.push(model);
     };

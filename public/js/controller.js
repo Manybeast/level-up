@@ -13,7 +13,7 @@ var Controller = (function () {
             self.setItem(title);
         });
     }
-
+    
     Controller.prototype.show = function () {
         this.view.render(this.model.getAll());
     };

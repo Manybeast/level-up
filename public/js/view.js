@@ -20,9 +20,9 @@ var View = (function () {
 
     View.prototype.renderOne = function (item) {
         //Шаблон для отрисовки одного элемента списка
-        var defaultTemplate = '<li data-id="{{id}}" class="{{complited}}">'
+        var defaultTemplate = '<li id="{{id}}" class="{{complited}}">'
             + '<div class="view">'
-            + '<input class="toggle" type="chekbox" {{checked}}>'
+            + '<input class="toggle" type="checkbox" {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
@@ -32,6 +32,8 @@ var View = (function () {
        templ = templ.replace('{{complited}}', item.complited);
        templ = templ.replace('{{checked}}', item.checked);
        templ = templ.replace('{{title}}', item.title);
+        this.complited(item.id);
+        
        this.view = this.view + templ;
     };
 
@@ -45,6 +47,17 @@ var View = (function () {
                 }
             });
         }
+    };
+    
+    View.prototype.complited = function (id) {
+        var _li = this.output.find('#' + id);
+        _li.find('.toggle').on('click', function () {
+            if (_li.hasClass('complited') === true) {
+                _li.toggleClass('complited');
+            } else {
+                _li.toggleClass('complited');
+            }
+        });
     };
 
     return View;
