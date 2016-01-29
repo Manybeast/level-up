@@ -15,12 +15,11 @@ var Model = (function (){
                 completed: false,
                 checked: ''
             }
-        ];
-        console.log('init Model');
+        ]
     }
 
     function generateId() {
-       return Math.floor((1 + Math.random()) * 0x10000);
+        return Math.floor((1 + Math.random()) * 0x10000);
     }
 
     Model.prototype.getAll = function () {
@@ -37,6 +36,10 @@ var Model = (function (){
 
         this.items.push(model);
     };
+
+    Model.prototype.deleteItem = function (id) {
+        var cur
+    }
 
     return Model;
 })();
