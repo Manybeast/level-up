@@ -8,10 +8,15 @@ var Controller = (function () {
 
         //Первоначальная отрисовка списка
         this.show();
+        this.view.addChannels('addItem', this.setItem);
     }
 
     Controller.prototype.show = function () {
         this.view.render(this.model.getAll());
+    };
+
+    Controller.prototype.setItem = function (title) {
+        this.model.setItem(title);
     };
 
     return Controller;

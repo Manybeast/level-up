@@ -11,19 +11,31 @@ var Model = (function (){
             {
                 id: 1,
                 title: "Test2",
-                completed: false
+                completed: false,
+                checked: ''
             }
-        ]
+        ];
+        console.log('init Model');
+    }
+
+    function generateId() {
+       return Math.floor((1 + Math.random()) * 0x10000);
     }
 
     Model.prototype.getAll = function () {
         return this.items;
     };
 
-    //function generateId() {
-    //    return Math.floor((1 + Math.random()) * 0x10000);
-    //}
+    Model.prototype.setItem = function () {
+        var model = {
+            id: generateId(),
+            title: itemTitle,
+            completed: false,
+            checked: ''
+        };
 
+        this.items.push(model);
+    };
 
     return Model;
 })();
