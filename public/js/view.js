@@ -20,7 +20,7 @@ var View = (function () {
 
     View.prototype.renderOne = function (item) {
         //Шаблон для отрисовки одного элемента списка
-        var defaultTemplate = '<li id="{{id}}" class="{{complited}}">'
+        var defaultTemplate = '<li data-id="{{id}}" class="{{completed}}">'
             + '<div class="view">'
             + '<input class="toggle" type="checkbox" {{checked}}>'
             + '<label>{{title}}</label>'
@@ -29,98 +29,52 @@ var View = (function () {
             + '</li>',
             templ = defaultTemplate.replace('{{id}}', item.id);
 
-       templ = templ.replace('{{complited}}', item.complited);
+       templ = templ.replace('{{completed}}', item.completed);
        templ = templ.replace('{{checked}}', item.checked);
        templ = templ.replace('{{title}}', item.title);
-        this.complited(item.id);
-        
+
+
        this.view = this.view + templ;
+
     };
 
-    View.prototype.addChanels = function (chenallName, handler) {
+    function bindCustomEvent (target, type, callback) {
+        target.on(type, callback);
+    }
+
+    View.prototype.addChanals = function (chanalName, handler) {
         var self = this;
 
-        if (chenallName === 'addItem') {
+        if (chanalName === 'addItem') {
             this.input.on('keypress', function (e) {
-                if (e.which ===13) {
+                if (e.which === 13) {
                     handler($(this).val());
                 }
             });
+        } else if (chanalName === 'comleteItem') {
+            this._li = $(this.output).find('li');
+            this._li.find('.toggle').on('click', function () {
+                handler($(this));
+            });
         }
-    };
-    
-    View.prototype.complited = function (id) {
-        var _li = this.output.find('#' + id);
-        _li.find('.toggle').on('click', function () {
-            if (_li.hasClass('complited') === true) {
-                _li.toggleClass('complited');
-            } else {
-                _li.toggleClass('complited');
-            }
-        });
+        else if (chanalName === 'deleteItem') {
+            //переделать без bindCustomEvent
+            bindCustomEvent(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if (!$(e.target).hasClass('destroy')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
+                handler(id);
+            });
+        }
     };
 
     return View;
 })();
-//var View = (function () {
-//    function View() {
-//        this.activeBtn = $('#active');
-//        this.input = $('.new-todo');
-//        this.output = $('.todo-list');
-//
-//        this.view = '';
-//    }
-//
-//    View.prototype.render = function (data) {
-//        var self = this;
-//
-//        this.view = '';
-//        data.forEach(function (item) {
-//            self.renderOne(item);
-//        });
-//
-//        debugger;
-//        this.output.html(this.view);
-//    };
-//
-//    View.prototype.renderOne = function (item) {
-//
-//        //Шаблон для отрисовки одного элемента списка
-//        var defaultTemplate =  '<li data-id="{{id}}" class="{{completed}}">'
-//            + '<div class="view">'
-//            + '<input class="toggle" type="checkbox" {{checked}}>'
-//            + '<label>{{title}}</label>'
-//            + '<button class="destroy"></button>'
-//            + '</div>'
-//            + '</li>',
-//            template = defaultTemplate.replace('{{id}}', item.id);
-//
-//        template = template.replace('{{completed}}', item.completed);
-//        template = template.replace('{{checked}}', item.checked);
-//        template = template.replace('{{title}}', item.title);
-//
-//        this.view = this.view + template;
-//    };
-//
-//    View.prototype.bind = function (event, handler) {
-//        var self = this;
-//
-//        //разделение "каналов" событий
-//        if (event === 'addItem') {
-//            bindCustomEvents(self.input, 'blur keypress', function (e) {
-//                var title = self.input.val();
-//
-//                //навешевание слбытия на клавишу enter code = 13
-//                if((e.which === 13 || e.type === 'blur') && title) {
-//                    handler(title);
-//                    self.input.val('');
-//                }
-//            });
-//        }
-//    };
-//
-//    //обертка для более удобного навешивания событий для работы с разными сущностями.
-
-//
-//   return View
-//})();

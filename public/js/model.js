@@ -3,13 +3,13 @@ var Model = (function (){
         this.items = [{
                 id: 0,
                 title: "Test",
-                complited: 'complited',
+                completed: 'completed',
                 checked: 'checked'
             },
             {
                 id:1,
                 title: 'test2',
-                complited: '',
+                completed: '',
                 checked: ''
             }
         ];
@@ -31,10 +31,24 @@ var Model = (function (){
             complited: '',
             checked: ''
         };
-        
-        this.view.complited(model.id);
 
         this.items.push(model);
+    };
+
+    Model.prototype.completedItem = function (item) {
+        if (item.hasClass('completed') === true) {
+            item.toggleClass('completed');
+        } else {
+            item.toggleClass('completed');
+        }
+    };
+
+    Model.prototype.deleteItem = function (id) {
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id = parseInt(id);
+        })[0]);
+
+
     };
 
     return Model;
