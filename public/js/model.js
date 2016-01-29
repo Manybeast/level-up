@@ -12,7 +12,13 @@ var Model = (function () {
             {
                 id: 1,
                 title: 'test2',
-                complited: false,
+                completed: false,
+                checked: ''
+            },
+            {
+                id: 2,
+                title: 'test2',
+                completed: false,
                 checked: ''
             }
         ]
@@ -36,6 +42,14 @@ var Model = (function () {
 
         this.items.push(model);
         debugger;
+    };
+
+    Model.prototype.deleteItem = function (id) {
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items.splice(currentIndex, 1);
     };
 
 

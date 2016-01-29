@@ -14,6 +14,12 @@ var Controller = (function () {
         this.view.addChannels('addItem', function (title) {
             self.setItem(title);
         });
+        this.view.addChannels('deleteItem', function (id) {
+            self.deleteItem(id);
+        });
+        this.view.addChannels('test', function () {
+            console.log('test');
+        });
     }
 
     Controller.prototype.show = function () {
@@ -22,6 +28,11 @@ var Controller = (function () {
 
     Controller.prototype.setItem = function (title) {
         this.model.setItem(title);
+        this.show();
+    };
+
+    Controller.prototype.deleteItem = function (id) {
+        this.model.deleteItem(id);
         this.show();
     };
 
