@@ -7,12 +7,16 @@
         this.items = [{
             id: 0,
             title: "Test",
-            completed: true
+            completed: true,
+            checked: ''
         },
             {
                 id: 1,
                 title: "Test2",
                 completed: false
+                title: 'test2',
+                completed: false,
+                checked: ''
             }
         ]
     }
@@ -34,6 +38,15 @@
     function generateId() {
         return Math.floor((1 + Math.random()) * 0x10000);
     }
+        
+	
+	Model.prototype.deleteItem = function (id) {
+		var currentIndex = this.items.indexOf (this.items.filter(function (item){
+			return item.id === parseInt(id);
+		})[0]);
+		
+		this.items.splice(currentIndex, 1);
+	};
 
     window.app = window.app || {};
     window.app.Model = Model;

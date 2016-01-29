@@ -16,13 +16,25 @@
             self.show();
         });
 
-        this.show();
+		this.view.addChannels('deleteItem', function (id){
+			self.deleteItem(id);
+		});
+
     }
 
     Controller.prototype.show = function () {
         this.view.render(this.model.getAll());
     };
 
+    Controller.prototype.setItem = function (title) {
+        this.model.setItem(title);
+        this.show();
+    };
+	
+	Controller.prototype.deleteItem = function (id){
+		this.model.deleteItem(id);
+		this.show();
+	};
 
     window.app = window.app || {};
     window.app.Controller = Controller;

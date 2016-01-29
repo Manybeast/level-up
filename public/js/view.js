@@ -56,6 +56,12 @@
                     self.input.val('');
                 }
             });
+        }else if (channelName === 'deleteItem'){
+        	this.destroyBtn = $(this.output).find('.destroy');
+			bindCustomEvents(this.destroyBtn, 'click', function (e){
+				var id = $(this).parent().parent().attr('data-id');
+				handler(id);
+			})
         }
     };
 
