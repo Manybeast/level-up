@@ -6,7 +6,8 @@ var Model = (function (){
         this.items = [{
                 id: 0,
                 title: "Test",
-                completed: true
+                completed: true,
+                checked: 'checked'
             },
             {
                 id: 1,
@@ -26,7 +27,7 @@ var Model = (function (){
         return this.items;
     };
 
-    Model.prototype.setItem = function () {
+    Model.prototype.setItem = function (itemTitle) {
         var model = {
             id: generateId(),
             title: itemTitle,

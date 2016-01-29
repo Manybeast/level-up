@@ -3,12 +3,16 @@
  */
 var Controller = (function () {
     function Controller (model, view) {
+        console.log('init Controller');
+        var self = this;
         this.view = view;
         this.model = model;
 
         //Первоначальная отрисовка списка
         this.show();
-        this.view.addChannels('addItem', this.setItem);
+        this.view.addChannels('addItem', function (title) {
+            self.setItem(title);
+        });
     }
 
     Controller.prototype.show = function () {
@@ -17,6 +21,7 @@ var Controller = (function () {
 
     Controller.prototype.setItem = function (title) {
         this.model.setItem(title);
+        this.show();
     };
 
     return Controller;

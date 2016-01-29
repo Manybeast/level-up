@@ -19,7 +19,6 @@ var View = (function () {
             self.renderOne(item);
         });
 
-        debugger;
         this.output.html(this.view);
     };
 
@@ -41,7 +40,7 @@ var View = (function () {
         this.view = this.view + template;
     };
 
-    Viev.prototype.addChennels = function (chennelNeme, handler) {
+    View.prototype.addChannels = function (chennelNeme, handler) {
         var self = this;
 
         if(chennelNeme === 'addItem') {
