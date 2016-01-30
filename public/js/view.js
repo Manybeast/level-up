@@ -38,7 +38,6 @@ var View = (function () {
         template = template.replace('{{checked}}', item.checked);
         template = template.replace('{{title}}', item.title);
 
-        debugger;
         this.view = this.view + template;
     };
 
