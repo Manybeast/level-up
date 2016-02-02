@@ -36,6 +36,7 @@ var View = (function () {
 
         template = template.replace('{{completed}}', item.completed);
         template = template.replace('{{checked}}', item.checked);
+        template = template.replace('{{title}}', item.title);
         template = template.replace('{{isRed}}', (item.isRed) ? 'isRed' : '');
 
         debugger;
@@ -68,7 +69,8 @@ var View = (function () {
 
                 id = $(target).parent().parent().attr('data-id');
                 handler(id);
-            })
+            });
+        }
         else if (channelName === 'colorItem') {
                 bindCustomEvents(this.output, 'click', function (e) {
                     var target = null,
@@ -82,7 +84,7 @@ var View = (function () {
                     id = $(target).parent().parent().attr('data-id');
                     handler(id);
 
-                })
+                });
         } else if (channelName === 'test') {
             bindCustomEvents(this.output, 'click', function (e) {
                 if (!$(e.target).hasClass('title')) {
