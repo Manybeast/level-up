@@ -17,9 +17,13 @@ var Controller = (function () {
         this.view.addChannels('deleteItem', function (id) {
             self.deleteItem(id);
         });
+        this.view.addChannels('colorItem', function () {
+            self.colorItem(id);
+        });
         this.view.addChannels('test', function () {
             console.log('test');
         });
+
     }
 
     Controller.prototype.show = function () {
@@ -33,6 +37,11 @@ var Controller = (function () {
 
     Controller.prototype.deleteItem = function (id) {
         this.model.deleteItem(id);
+        this.show();
+    };
+
+    Controller.prototype.colorItem = function (id) {
+        this.model.changeColor(id);
         this.show();
     };
 

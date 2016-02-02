@@ -28,7 +28,7 @@ var View = (function () {
         var defaultTemplate = '<li data-id="{{id}}" class="{{completed}} ">'
                 + '<div class="view">'
                 + '<input class="toggle" type="checkbox" {{checked}}>'
-                + '<label class = "title">{{title}}</label>'
+                + '<label class = "title {{isRed}}">{{title}}</label>'
                 + '<button class="destroy"></button>'
                 + '</div>'
                 + '</li>',
@@ -36,7 +36,7 @@ var View = (function () {
 
         template = template.replace('{{completed}}', item.completed);
         template = template.replace('{{checked}}', item.checked);
-        template = template.replace('{{title}}', item.title);
+        template = template.replace('{{isRed}}', (item.isRed) ? 'isRed' : '');
 
         debugger;
         this.view = this.view + template;
@@ -60,7 +60,7 @@ var View = (function () {
                     id = null;
 
                 if (!$(e.target).hasClass('destroy')) {
-                    e.preventDefault();
+                    e.stopPropagation();
                     return;
                 }
 
@@ -69,6 +69,20 @@ var View = (function () {
                 id = $(target).parent().parent().attr('data-id');
                 handler(id);
             })
+        else if (channelName === 'colorItem') {
+                bindCustomEvents(this.output, 'click', function (e) {
+                    var target = null,
+                        id = null;
+
+                    if (!$(e.target).hasClass('isRed')) {
+                        e.stopPropagation();
+                        return;
+                    }
+
+                    id = $(target).parent().parent().attr('data-id');
+                    handler(id);
+
+                })
         } else if (channelName === 'test') {
             bindCustomEvents(this.output, 'click', function (e) {
                 if (!$(e.target).hasClass('title')) {
