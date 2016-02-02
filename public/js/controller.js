@@ -14,6 +14,12 @@ var Controller = (function () {
         this.view.addChannels('addItem', function (title) {
             self.setItem(title);
         });
+        this.view.addChannels('deleteItem', function (id) {
+            self.deleteItem(id);
+        });
+        this.view.addChannels('testEvents', function(id){
+            self.expectColor(id);
+        });
     }
 
     Controller.prototype.show = function () {
@@ -24,6 +30,15 @@ var Controller = (function () {
         this.model.setItem(title);
         this.show();
     };
+
+    Controller.prototype.deleteItem = function (id) {
+        this.model.deleteItem(id);
+        this.show();
+    };
+    Controller.prototype.expectColor = function(id){
+        this.model.colorChange(id);
+        this.show();
+    }
 
     return Controller;
 })();

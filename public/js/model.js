@@ -7,12 +7,14 @@ var Model = (function () {
             id: 0,
             title: "Test",
             completed: true,
+            colorizing: false,
             checked: 'checked'
         },
             {
                 id: 1,
                 title: 'test2',
                 complited: false,
+                colorizing: false,
                 checked: ''
             }
         ]
@@ -37,6 +39,13 @@ var Model = (function () {
         this.items.push(model);
         debugger;
     };
+    Model.prototype.colorChange = function(){
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items[currentIndex].colorizing = !this.items[currentIndex].colorizing;
+    }
 
 
     return Model;

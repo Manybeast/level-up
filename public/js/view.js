@@ -11,7 +11,7 @@ var View = (function () {
         this.output = $('.todo-list');
     }
 
-    View.prototype.render = function (todos) {
+    View.prototype.render = function (todos, params) {
         var self = this;
 
         this.view = '';
@@ -25,19 +25,20 @@ var View = (function () {
 
     View.prototype.renderOne = function (item) {
         //Шаблон для отрисовки одного элемента списка
-        var defaultTemplate = '<li data-id="{{id}}" class="{{complited}}">'
+        var defaultTemplate = '<li data-id="{{id}}" class="{{completed}} ">'
                 + '<div class="view">'
                 + '<input class="toggle" type="checkbox" {{checked}}>'
-                + '<label>{{title}}</label>'
+                + '<label class = "title {{colorized}}">{{title}}</label>'
                 + '<button class="destroy"></button>'
                 + '</div>'
                 + '</li>',
             template = defaultTemplate.replace('{{id}}', item.id);
 
-        template = template.replace('{{complited}}', item.complited);
+        template = template.replace('{{completed}}', item.completed);
         template = template.replace('{{checked}}', item.checked);
         template = template.replace('{{title}}', item.title);
-
+    
+        debugger;
         this.view = this.view + template;
     };
 
@@ -48,15 +49,37 @@ var View = (function () {
             bindCustomEvents(self.input, 'blur keypress', function (e) {
                 var title = self.input.val();
                 //навешевание слбытия на клавишу enter code = 13
-                if((e.which === 13 || e.type === 'blur') && title) {
+                if ((e.which === 13 || e.type === 'blur') && title) {
                     handler(title);
                     self.input.val('');
                 }
             });
+        } else if (channelName === 'deleteItem') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if (!$(e.target).hasClass('destroy')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
+                handler(id);
+            })
+        } else if(channelName === 'testEvents') {
+            bindCustomEvents(this.output, 'click', function(e){
+                if($(e.target).hasClass('title')) {
+                    console.log(e);
+                    var id = $(e.target).parent().parent().attr('data-id');
+                    handler(id);
+                }
+            });
         }
 
-    };
-
+    }
 
     function bindCustomEvents(target, type, callback) {
         target.on(type, callback);
