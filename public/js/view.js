@@ -22,7 +22,7 @@ var View = (function () {
         //Шаблон для отрисовки одного элемента списка
         var defaultTemplate = '<li data-id="{{id}}" class="{{completed}}">'
             + '<div class="view">'
-            + '<input class="toggle" type="checkbox" {{checked}}>'
+            + '<input class="toggle" type="checkbox" checked = {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
@@ -51,13 +51,32 @@ var View = (function () {
                     handler($(this).val());
                 }
             });
-        } else if (chanalName === 'comleteItem') {
-            this._li = $(this.output).find('li');
-            this._li.find('.toggle').on('click', function () {
-                handler($(this));
-            });
-        }
-        else if (chanalName === 'deleteItem') {
+        } else if (chanalName === 'completeItem') {
+            bindCustomEvent(this.output, 'click', function (e) {
+                if (!$(e.target).hasClass('toggle')) {
+                    e.preventDefault();
+                    return;
+                }
+
+//                $(e.target).closest('li').toggleClass('completed');
+//                
+//                if ($(e.target).attr('checked') === 'checked') {
+//                    $(e.target).removeAttr('checked');
+//                } else {
+//                    $(e.target).attr('checked', ' ');
+//                }
+                
+                if ($(e.target).attr('checked') === 'checked' && $(e.target).closest('li').hasClass('completed') === true) {
+                    $(e.target).removeAttr('checked');
+                    $(e.target).closest('li').removeClass('completed');
+                } else {
+                    $(e.target).removeAttr('checked');
+                    $(e.target).closest('li').removeClass('completed');
+                    $(e.target).attr('checked', ' ');
+                    $(e.target).closest('li').addClass('completed');
+                }
+            })
+        } else if (chanalName === 'deleteItem') {
             //переделать без bindCustomEvent
             bindCustomEvent(this.output, 'click', function (e) {
                 var target = null,
@@ -70,7 +89,7 @@ var View = (function () {
 
                 target = e.target;
 
-                id = $(target).parent().parent().attr('data-id');
+                id = $(target).closest('li').attr('data-id');
                 handler(id);
             });
         }

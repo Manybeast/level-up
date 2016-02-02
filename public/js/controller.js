@@ -16,8 +16,8 @@ var Controller = (function () {
             self.deleteItem(id);
         });
 
-        this.view.addChanals('completeItem', function (item) {
-            self.completeItem(item);
+        this.view.addChanals('completeItem', function () {
+            this.view.input.val('');
         });
     }
 
@@ -29,10 +29,6 @@ var Controller = (function () {
         this.model.setItem(title);
         this.show();
         this.view.input.val('');
-    };
-
-    Controller.prototype.completeItem = function (item) {
-        this.model.completeItem(item);
     };
 
     Controller.prototype.deleteItem = function (id) {

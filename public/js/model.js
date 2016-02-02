@@ -28,27 +28,19 @@ var Model = (function (){
         var model = {
             id: generateId(),
             title: itemTitle,
-            complited: '',
+            completed: '',
             checked: ''
         };
 
         this.items.push(model);
     };
 
-    Model.prototype.completedItem = function (item) {
-        if (item.hasClass('completed') === true) {
-            item.toggleClass('completed');
-        } else {
-            item.toggleClass('completed');
-        }
-    };
-
     Model.prototype.deleteItem = function (id) {
         var currentIndex = this.items.indexOf(this.items.filter(function (item) {
-            return item.id = parseInt(id);
+            return item.id === parseInt(id);
         })[0]);
 
-
+        this.items.splice(currentIndex, 1);
     };
 
     return Model;
