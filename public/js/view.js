@@ -33,7 +33,6 @@ var View = (function () {
        templ = templ.replace('{{checked}}', item.checked);
        templ = templ.replace('{{title}}', item.title);
 
-
        this.view = this.view + templ;
 
     };
@@ -52,44 +51,46 @@ var View = (function () {
                 }
             });
         } else if (chanalName === 'completeItem') {
-            bindCustomEvent(this.output, 'click', function (e) {
+            this.output.on('click', function (e) {
+                var id = null;
+
                 if (!$(e.target).hasClass('toggle')) {
-                    e.preventDefault();
+                    e.stopPropagation();
                     return;
                 }
 
 //                $(e.target).closest('li').toggleClass('completed');
-//                
+//
 //                if ($(e.target).attr('checked') === 'checked') {
 //                    $(e.target).removeAttr('checked');
 //                } else {
-//                    $(e.target).attr('checked', ' ');
+//                    $(e.target).attr('checked', '');
 //                }
-                
-                if ($(e.target).attr('checked') === 'checked' && $(e.target).closest('li').hasClass('completed') === true) {
+
+                if ($(e.target).attr('checked') === 'true' && $(e.target).closest('li').hasClass('true')) {
                     $(e.target).removeAttr('checked');
-                    $(e.target).closest('li').removeClass('completed');
+                    $(e.target).closest('li').removeClass('true');
                 } else {
                     $(e.target).removeAttr('checked');
-                    $(e.target).closest('li').removeClass('completed');
-                    $(e.target).attr('checked', ' ');
-                    $(e.target).closest('li').addClass('completed');
+                    $(e.target).closest('li').removeClass('true');
+                    $(e.target).attr('checked', 'true');
+                    $(e.target).closest('li').addClass('true');
                 }
-            })
+
+                id = $(e.target).closest('li').attr('data-id');
+                handler(id);
+            });
         } else if (chanalName === 'deleteItem') {
             //переделать без bindCustomEvent
-            bindCustomEvent(this.output, 'click', function (e) {
-                var target = null,
-                    id = null;
+            this.output.on('click', function (e) {
+                var id = null;
 
                 if (!$(e.target).hasClass('destroy')) {
-                    e.preventDefault();
+                    e.stopPropagation();
                     return;
                 }
 
-                target = e.target;
-
-                id = $(target).closest('li').attr('data-id');
+                id = $(e.target).closest('li').attr('data-id');
                 handler(id);
             });
         }

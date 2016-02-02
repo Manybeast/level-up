@@ -3,14 +3,14 @@ var Model = (function (){
         this.items = [{
                 id: 0,
                 title: "Test",
-                completed: 'completed',
-                checked: 'checked'
+                completed: true,
+                checked: true
             },
             {
                 id:1,
                 title: 'test2',
-                completed: '',
-                checked: ''
+                completed: false,
+                checked: false
             }
         ];
         console.log('init Model');
@@ -28,8 +28,8 @@ var Model = (function (){
         var model = {
             id: generateId(),
             title: itemTitle,
-            completed: '',
-            checked: ''
+            completed: false,
+            checked: false
         };
 
         this.items.push(model);
@@ -41,6 +41,15 @@ var Model = (function (){
         })[0]);
 
         this.items.splice(currentIndex, 1);
+    };
+
+    Model.prototype.completeItem = function (id) {
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items[currentIndex].completed = !this.items[currentIndex].completed;
+        this.items[currentIndex].checked = !this.items[currentIndex].checked;
     };
 
     return Model;
