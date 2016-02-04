@@ -15,6 +15,7 @@ var View = (function () {
         var self = this;
 
         this.view = '';
+
         todos.forEach(function (item) {
             self.renderOne(item);
         });
@@ -27,7 +28,7 @@ var View = (function () {
         var defaultTemplate =  '<li data-id="{{id}}" class="{{completed}}">'
             + '<div class="view">'
             + '<input class="toggle" type="checkbox" {{checked}}>'
-            + '<label>{{title}}</label>'
+            + '<label class = "title">{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
             + '</li>',
@@ -40,10 +41,10 @@ var View = (function () {
         this.view = this.view + template;
     };
 
-    View.prototype.addChannels = function (chennelNeme, handler) {
+    View.prototype.addChannels = function (channelName, handler) {
         var self = this;
 
-        if(chennelNeme === 'addItem') {
+        if(channelName === 'addItem') {
             bindCustomEvents(self.input, 'blur keypress', function (e) {
                 var title = self.input.val();
 
@@ -54,10 +55,41 @@ var View = (function () {
                 }                
             });
         } else if (channelName === 'deleteItem') {
-            this.destroyBtn = $(this.output).find('.destroy');
-            bindCustomEvents(this.destroyBtn, 'click', function (e) {
-                var id = $(this).parent().parent().attr('data-id');
+            bindCustomEvents(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if (!$(e.target).hasClass('destroy')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
                 handler(id);
+            });
+        } else if (channelName === 'test') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                if (!$(e.target).hasClass('title')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                $(e.target).css({
+                    color: 'red'
+                })
+            })
+        } else if (channelName === 'strikeout') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                if (!$(e.target).hasClass('title')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                $(e.target).css({
+                    textDecoration: 'line-through'
+                })
             })
         }
     };

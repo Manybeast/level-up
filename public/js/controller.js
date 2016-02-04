@@ -13,8 +13,14 @@ var Controller = (function () {
         this.view.addChannels('addItem', function (title) {
             self.setItem(title);
         });
-        this.view.addChannels('deleteItem', function () {
-
+        this.view.addChannels('deleteItem', function (id) {
+            self.deleteItem(id);
+        });
+        this.view.addChannels('test', function () {
+            console.log('test');
+        });
+        this.view.addChannels('strikeout', function () {
+            console.log('strikeout');
         });
     }
 

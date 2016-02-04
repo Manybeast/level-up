@@ -14,6 +14,12 @@ var Model = (function (){
                 title: "Test2",
                 completed: false,
                 checked: ''
+            },
+            {
+                id: 2,
+                title: "Test3",
+                completed: false,
+                checked: ''
             }
         ]
     }
@@ -38,8 +44,12 @@ var Model = (function (){
     };
 
     Model.prototype.deleteItem = function (id) {
-        var cur
-    }
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items.splice(currentIndex, 1);
+    };
 
     return Model;
 })();
