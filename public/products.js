@@ -58,7 +58,7 @@ Object.freeze(AJAX);
 
 var Products = (function () {
     function Constructor(root) {
-        this.items = null;
+        this.items = [];
         this.root = document.querySelector(root);
         this.listItem = this.root.querySelector('.listProducts');
         this.addBtn = this.root.querySelector('.add');
