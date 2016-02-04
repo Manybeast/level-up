@@ -9,6 +9,7 @@ var View = (function () {
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
+        this.filters = $($('.filters')).find('a');
     }
 
     View.prototype.render = function (todos, params) {
@@ -45,7 +46,7 @@ var View = (function () {
         var self = this;
 
         if (channelName === 'addItem') {
-            bindCustomEvents(self.input, 'blur keypress', function (e) {
+            bindCustomEvents(self.input, 'keypress', function (e) {
                 var title = self.input.val();
                 //навешевание слбытия на клавишу enter code = 13
                 if ((e.which === 13 || e.type === 'blur') && title) {
@@ -53,7 +54,8 @@ var View = (function () {
                     self.input.val('');
                 }
             });
-        } else if (channelName === 'deleteItem') {
+        }
+        if (channelName === 'deleteItem') {
             bindCustomEvents(this.output, 'click', function (e) {
                 var target = null,
                     id = null;
@@ -68,16 +70,14 @@ var View = (function () {
                 id = $(target).parent().parent().attr('data-id');
                 handler(id);
             })
-        } else if (channelName === 'test') {
-            bindCustomEvents(this.output, 'click', function (e) {
-                if (!$(e.target).hasClass('title')) {
-                    e.preventDefault();
-                    return;
-                }
+        }
+        if (channelName === 'filter') {
+            bindCustomEvents(this.filters, 'click', function (e) {
+                $(self.filters).removeClass('selected');
 
-                $(e.target).css({
-                    color: 'red'
-                })
+                $(this).addClass('selected');
+
+                handler($(e.target).attr('data-filter'));
             })
         }
     };

@@ -3,29 +3,45 @@
  */
 var Model = (function () {
     function Model() {
-        this.items = [{
-            id: 0,
-            title: "Test",
-            completed: true,
-            checked: 'checked'
-        },
+        this.items = [
+            {
+                id: 0,
+                title: "Test",
+                completed: true
+            },
             {
                 id: 1,
                 title: 'test2',
-                completed: false,
-                checked: ''
+                completed: false
             },
             {
                 id: 2,
                 title: 'test2',
-                completed: false,
-                checked: ''
+                completed: false
             }
-        ]
+        ];
     }
 
-    Model.prototype.getAll = function () {
-        return this.items;
+    Model.prototype.getItems = function (filter) {
+        var self = this,
+            filters = {
+                'all': function () {
+                    return self.items;
+                },
+                'completed': function () {
+                   return self.items.filter(function (item) {
+                        return item.completed === true;
+                    })
+                },
+                'active': function () {
+                    return self.items.filter(function (item) {
+                        return item.completed === false;
+                    })
+                }
+
+            };
+
+        return filters[filter]();
     };
 
     function generateId() {
@@ -41,7 +57,6 @@ var Model = (function () {
         };
 
         this.items.push(model);
-        debugger;
     };
 
     Model.prototype.deleteItem = function (id) {
