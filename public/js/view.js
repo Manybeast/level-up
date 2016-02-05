@@ -36,7 +36,7 @@ var View = (function () {
             template = defaultTemplate.replace('{{id}}', item.id);
 
         template = template.replace('{{completed}}', item.completed);
-        template = template.replace('{{checked}}', item.checked ? 'checked' : '');
+        template = template.replace('{{checked}}', item.completed ? 'checked' : '');
         template = template.replace('{{title}}', item.title);
 
         this.view = this.view + template;
@@ -81,7 +81,7 @@ var View = (function () {
             })
         }
         
-         if (channelName === 'compleate') {
+         if (channelName === 'complete') {
             bindCustomEvents(this.output, 'click', function (e) {
                 var target = null,
                     id = null;

@@ -7,7 +7,7 @@ var Model = (function () {
             {
                 id: 0,
                 title: "Test",
-                completed: true
+                completed: false
             },
             {
                 id: 1,
@@ -67,12 +67,14 @@ var Model = (function () {
         this.items.splice(currentIndex, 1);
     };
     
-    Model.prototype.compleateItem = function (id) {
+    Model.prototype.completeItem = function (id) {
+
         var currentIndex = this.items.indexOf(this.items.filter(function (item) {
             return item.id === parseInt(id);
         })[0]);
 
-        this.items[currentIndex].checked = !this.items[currentIndex].checked;
+        this.items[currentIndex].completed = !this.items[currentIndex].completed;
+        console.log(this.items[currentIndex]);
     };
 
 
