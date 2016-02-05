@@ -20,8 +20,25 @@ var Model = (function (){
         return Math.floor((1 + Math.random()) * 0x10000);
     }
 
-    Model.prototype.getAll = function () {
-        return this.items;
+    Model.prototype.getItem = function (typeOfFilter) {
+        var self = this,
+            filters = {
+                'all': function () {
+                    return self.items;
+                },
+                'active': function () {
+                    return self.items.filter(function (item) {
+                        return item.completed === false;
+                    });
+                },
+                'completed': function () {
+                    return self.items.filter(function (item) {
+                        return item.completed === true;
+                    });
+                }
+            };
+
+        return filters[typeOfFilter]();
     };
 
     Model.prototype.setItem = function (itemTitle) {
@@ -51,20 +68,8 @@ var Model = (function (){
         this.items[currentIndex].completed = !this.items[currentIndex].completed;
     };
 
-    Model.prototype.getCompleted = function () {
-        return this.getAll().filter(function (item) {
-                return item.completed === true;
-            });
-    };
-
-    Model.prototype.getActive = function () {
-        return this.getAll().filter(function (item) {
-                return item.completed === false;
-            });
-    };
-
     Model.prototype.leftItems = function () {
-        return this.getAll().filter(function (item) {
+        return this.items.filter(function (item) {
                 return item.completed === false;
             });
     };

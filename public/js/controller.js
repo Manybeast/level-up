@@ -6,8 +6,7 @@ var Controller = (function () {
         console.log('init Controller');
         this.view = view;
         this.model = model;
-        this.uncompletedCount = null;
-        this.completed = null;
+        this.filter = 'all';
 
         //Первоначальная отрисовка списка
         this.show();
@@ -26,21 +25,13 @@ var Controller = (function () {
             self.leftItems();
         });
 
-        this.view.addChanals('completedBtn', function () {
-            self.getCompleted();
-        });
-
-        this.view.addChanals('activeBtn', function () {
-            self.getActive();
-        });
-
-        this.view.addChanals('allBtn', function () {
-            self.show();
+        this.view.addChanals('filterBtn', function (filter) {
+            self.filterBtn(filter);
         });
     }
 
     Controller.prototype.show = function () {
-        this.view.render(this.model.getAll());
+        this.view.render(this.model.getItem(this.filter));
     };
 
     Controller.prototype.setItem = function (title) {
@@ -65,12 +56,9 @@ var Controller = (function () {
         this.view.leftItems(this.model.leftItems().length);
     };
 
-    Controller.prototype.getCompleted = function () {
-        this.view.render(this.model.getCompleted());
-    };
-
-    Controller.prototype.getActive = function () {
-        this.view.render(this.model.getActive());
+    Controller.prototype.filterBtn = function (filter) {
+        this.filter = filter;
+        this.show();
     };
 
     return Controller;

@@ -5,7 +5,7 @@ var View = (function () {
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
-        this.filters = $('.filters');
+        this.filters = $('.filters a');
     }
 
     View.prototype.render = function (todos) {
@@ -76,47 +76,17 @@ var View = (function () {
                 id = $(e.target).closest('li').attr('data-id');
                 handler(id);
             });
-        } else if (chanalName === 'activeBtn') {
-            var self = this;
-
-            this.filters.find('li #active').on('click', function (e) {
-                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'active') {
+        } else if (chanalName === 'filterBtn') {
+            this.filters.on('click', function (e) {
+                if ($(e.target).hasClass('selected')) {
                     e.stopPropagation();
                     return;
                 }
 
-                $(self.filters).find('li a').removeClass('selected');
+                $(self.filters).removeClass('selected');
                 $(e.target).addClass('selected');
 
-                handler();
-            });
-        } else if (chanalName === 'completedBtn') {
-            var self = this;
-
-            this.filters.find('li #completed').on('click', function (e) {
-                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'completed') {
-                    e.stopPropagation();
-                    return;
-                }
-
-                $(self.filters).find('li a').removeClass('selected');
-                $(e.target).addClass('selected');
-
-                handler();
-            });
-        } else if (chanalName === 'allBtn') {
-            var self = this;
-
-            this.filters.find('li #all').on('click', function (e) {
-                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'all') {
-                    e.stopPropagation();
-                    return;
-                }
-
-                $(self.filters).find('li a').removeClass('selected');
-                $(e.target).addClass('selected');
-
-                handler();
+                handler($(e.target).attr('id'));
             });
         }
     };
