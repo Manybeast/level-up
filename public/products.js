@@ -68,18 +68,38 @@ var Products = (function () {
         this.addEvents();
     }
 
-    Constructor.prototype.render = function () {
+    Constructor.prototype.renderAll = function () {
         var self = this;
         this.listItem.innerHTML = '';
-        this.items.forEach(function (item, i) {
-            var li = document.createElement('li');
-            li.innerHTML = item;
-            self.listItem.appendChild(li);
-            li.addEventListener('click', function () {
-                self.removeFruits(i);
-            })
+        this.items.forEach(function (item, i) {            
+            self.listItem.appendChild(self.renderOne(item, i));            
         })
     }
+
+    Constructor.prototype.renderOne = function (text, i) {
+        var self = this,
+            li,
+            title,
+            deleteBtn;
+
+        li = document.createElement('li');
+        title = document.createElement('span');
+        deleteBtn = document.createElement('span');
+        editField = document.createElement('input');
+        editField.style.display = 'none';
+
+        deleteBtn.classList.add('deleteBtn');
+        deleteBtn.innerHTML = 'x';
+        deleteBtn.addEventListener('click', function () {
+            self.removeFruits(i);
+        });
+
+        title.innerHTML = text;
+        editField.value = text;
+        li.appendChild(editField);
+        li.appendChild(title);
+        li.appendChild(deleteBtn);
+     }
 
 
     Constructor.prototype.getItems = function () {
@@ -87,7 +107,7 @@ var Products = (function () {
 
         AJAX.GET('fruites', function (data) {
             self.items = data;
-            self.render();
+            self.renderAll();
         });
     };
 
@@ -106,13 +126,12 @@ var Products = (function () {
 
         AJAX.POST('fruites', function (data) {
             self.items = data;
-            self.render();
+            self.renderAll();
         }, newItem);
     };
 
     Constructor.prototype.removeFruits = function (id) {
         var xhr = new XMLHttpRequest();
-
 
         xhr.open('DELETE', 'fruites/' + id, false);
 
@@ -125,7 +144,7 @@ var Products = (function () {
         } else {
             console.log(xhr.response);
             this.items = JSON.parse(xhr.response);
-            this.render();
+            this.renderAll();
         }
     };
 
