@@ -71,8 +71,10 @@ var Products = (function () {
     Constructor.prototype.renderAll = function () {
         var self = this;
         this.listItem.innerHTML = '';
-        this.items.forEach(function (item, i) {            
-            self.listItem.appendChild(self.renderOne(item, i));            
+        this.items.forEach(function (item, i) {
+            var li = document.createElement('li');
+            li.innerHTML = self.renderOne(item, i);    
+            self.listItem.appendChild(li);            
         })
     }
 
@@ -82,11 +84,10 @@ var Products = (function () {
             title,
             deleteBtn;
 
-        li = document.createElement('li');
+        li = document.createElement('div');
         title = document.createElement('span');
-        deleteBtn = document.createElement('span');
-        editField = document.createElement('input');
-        editField.style.display = 'none';
+        deleteBtn = document.createElement('span');       
+       
 
         deleteBtn.classList.add('deleteBtn');
         deleteBtn.innerHTML = 'x';
@@ -94,9 +95,7 @@ var Products = (function () {
             self.removeFruits(i);
         });
 
-        title.innerHTML = text;
-        editField.value = text;
-        li.appendChild(editField);
+        title.innerHTML = text;    
         li.appendChild(title);
         li.appendChild(deleteBtn);
      }
