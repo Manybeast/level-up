@@ -1,44 +1,54 @@
 /**
  * Created by IlyaLitvinov on 14.01.16.
  */
-var Controller = (function () {
-    function Controller(model, view) {
-        console.log('init Controller');
-        var self = this;
-
-        this.view = view;
-        this.model = model;
-
-        //Первоначальная отрисовка списка
-        this.show();
-        this.view.addChannels('addItem', function (title) {
-            self.setItem(title);
-        });
-        this.view.addChannels('deleteItem', function (id) {
-            self.deleteItem(id);
-        });
-        this.view.addChannels('testEvents', function(id){
-            self.expectColor(id);
-        });
+var Model = (function () {
+    function Model() {
+        this.items = [{
+            id: 0,
+            title: "Test",
+            completed: true,
+            colorizing: false,
+            checked: 'checked'
+        },
+            {
+                id: 1,
+                title: 'test2',
+                complited: false,
+                colorizing: false,
+                checked: ''
+            }
+        ]
     }
 
-    Controller.prototype.show = function () {
-        this.view.render(this.model.getAll());
+    Model.prototype.getAll = function () {
+        return this.items;
     };
 
-    Controller.prototype.setItem = function (title) {
-        this.model.setItem(title);
-        this.show();
-    };
-
-    Controller.prototype.deleteItem = function (id) {
-        this.model.deleteItem(id);
-        this.show();
-    };
-    Controller.prototype.expectColor = function(id){
-        this.model.colorChange(id);
-        this.show();
+    function generateId() {
+        return Math.floor((1 + Math.random()) * 0x10000);
     }
 
-    return Controller;
+    Model.prototype.setItem = function (itemTitle) {
+        var model = {
+            id: generateId(),
+            title: itemTitle,
+            complited: false,
+            checked: ''
+        };
+
+        this.items.push(model);
+        debugger;
+    };
+    Model.prototype.colorChange = function(){
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items[currentIndex].colorizing = !this.items[currentIndex].colorizing;
+    }
+    Model.prototype.changeState = function(){
+        
+    }
+
+    return Model;
 })();

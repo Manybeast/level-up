@@ -46,7 +46,9 @@ var Model = (function () {
 
         this.items[currentIndex].colorizing = !this.items[currentIndex].colorizing;
     }
+    Model.prototype.changeState = function(){
 
+    }
 
     return Model;
 })();
