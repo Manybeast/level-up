@@ -71,10 +71,8 @@ var Products = (function () {
     Constructor.prototype.renderAll = function () {
         var self = this;
         this.listItem.innerHTML = '';
-        this.items.forEach(function (item, i) {
-            var li = document.createElement('li');
-            li.innerHTML = self.renderOne(item, i);    
-            self.listItem.appendChild(li);            
+        this.items.forEach(function (item, i) {           
+            self.listItem.appendChild(self.renderOne(item, i));            
         })
     }
 
@@ -84,7 +82,7 @@ var Products = (function () {
             title,
             deleteBtn;
 
-        li = document.createElement('div');
+        li = document.createElement('li');
         title = document.createElement('span');
         deleteBtn = document.createElement('span');       
        
