@@ -52,7 +52,7 @@ var Model = (function () {
         var model = {
             id: generateId(),
             title: itemTitle,
-            complited: false,
+            completed: false,
             checked: ''
         };
 
@@ -65,6 +65,13 @@ var Model = (function () {
         })[0]);
 
         this.items.splice(currentIndex, 1);
+    };
+    Model.prototype.changeStat = function (id) {
+         var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+         this.items[currentIndex].completed = !this.items[currentIndex].completed;
+
     };
 
 

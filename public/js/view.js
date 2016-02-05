@@ -80,6 +80,21 @@ var View = (function () {
                 handler($(e.target).attr('data-filter'));
             })
         }
+        if (channelName === 'status') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if ($(e.target).hasClass('toggle')) {
+                    console.log('lalala');
+                }
+
+                id = $(e.target).parent().parent().attr('data-id');
+                handler(id);
+
+            })
+        
+        }
     };
 
     function bindCustomEvents(target, type, callback) {

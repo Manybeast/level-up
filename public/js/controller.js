@@ -24,6 +24,9 @@ var Controller = (function () {
         this.view.addChannels('filter', function (filter) {
             self.toFilter(filter)
         });
+         this.view.addChannels('status', function (id) {
+            self.changeStatus(id)
+        });
     }
 
     Controller.prototype.show = function () {
@@ -42,6 +45,10 @@ var Controller = (function () {
 
     Controller.prototype.toFilter = function (filter) {
         this.filter = filter;
+        this.show();
+    };
+    Controller.prototype.changeStatus = function (id) {
+        this.model.changeStat(id);
         this.show();
     };
 
