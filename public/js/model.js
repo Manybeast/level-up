@@ -4,13 +4,13 @@ var Model = (function (){
                 id: 0,
                 title: "Test",
                 completed: true,
-                checked: true
+                // checked: true
             },
             {
                 id:1,
                 title: 'test2',
                 completed: false,
-                checked: false
+                // checked: false
             }
         ];
         console.log('init Model');
@@ -49,7 +49,24 @@ var Model = (function (){
         })[0]);
 
         this.items[currentIndex].completed = !this.items[currentIndex].completed;
-        this.items[currentIndex].checked = !this.items[currentIndex].checked;
+    };
+
+    Model.prototype.getCompleted = function () {
+        return this.getAll().filter(function (item) {
+                return item.completed === true;
+            });
+    };
+
+    Model.prototype.getActive = function () {
+        return this.getAll().filter(function (item) {
+                return item.completed === false;
+            });
+    };
+
+    Model.prototype.leftItems = function () {
+        return this.getAll().filter(function (item) {
+                return item.completed === false;
+            });
     };
 
     return Model;

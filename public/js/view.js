@@ -23,7 +23,7 @@ var View = (function () {
         //Шаблон для отрисовки одного элемента списка
         var defaultTemplate = '<li data-id="{{id}}" class="{{completed}}">'
             + '<div class="view">'
-            + '<input class="toggle" type="checkbox" checked = {{checked}}>'
+            + '<input class="toggle" type="checkbox" {{checked}}>'
             + '<label>{{title}}</label>'
             + '<button class="destroy"></button>'
             + '</div>'
@@ -31,7 +31,7 @@ var View = (function () {
             templ = defaultTemplate.replace('{{id}}', item.id);
 
        templ = templ.replace('{{completed}}', item.completed);
-       templ = templ.replace('{{checked}}', item.checked);
+       templ = templ.replace('{{checked}}', item.completed ? 'checked' : '');
        templ = templ.replace('{{title}}', item.title);
 
        this.view = this.view + templ;
@@ -60,16 +60,6 @@ var View = (function () {
                     return;
                 }
 
-                if ($(e.target).attr('checked') === 'true' && $(e.target).closest('li').hasClass('true')) {
-                    $(e.target).removeAttr('checked');
-                    $(e.target).closest('li').removeClass('true');
-                } else {
-                    $(e.target).removeAttr('checked');
-                    $(e.target).closest('li').removeClass('true');
-                    $(e.target).attr('checked', 'true');
-                    $(e.target).closest('li').addClass('true');
-                }
-
                 id = $(e.target).closest('li').attr('data-id');
                 handler(id);
             });
@@ -88,47 +78,56 @@ var View = (function () {
             });
         } else if (chanalName === 'activeBtn') {
             var self = this;
-            
+
             this.filters.find('li #active').on('click', function (e) {
                 if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'active') {
                     e.stopPropagation();
                     return;
                 }
-                
+
                 $(self.filters).find('li a').removeClass('selected');
                 $(e.target).addClass('selected');
-                
+
                 handler();
             });
         } else if (chanalName === 'completedBtn') {
             var self = this;
-            
-            this.filters.find('li #completed').on('click', function (e) {        
+
+            this.filters.find('li #completed').on('click', function (e) {
                 if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'completed') {
                     e.stopPropagation();
                     return;
                 }
-                
+
                 $(self.filters).find('li a').removeClass('selected');
                 $(e.target).addClass('selected');
-                
+
                 handler();
             });
         } else if (chanalName === 'allBtn') {
             var self = this;
-            
+
             this.filters.find('li #all').on('click', function (e) {
                 if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'all') {
                     e.stopPropagation();
                     return;
                 }
-                
+
                 $(self.filters).find('li a').removeClass('selected');
                 $(e.target).addClass('selected');
-                
+
                 handler();
             });
         }
+    };
+
+    View.prototype.leftItems = function (count) {
+        $('.todo-count')
+            .html('<strong>'
+                + count
+                + '</strong>'
+                + ' '
+                + 'items left');
     };
 
     return View;
