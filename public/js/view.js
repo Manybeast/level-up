@@ -5,6 +5,7 @@ var View = (function () {
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
+        this.filters = $('.filters');
     }
 
     View.prototype.render = function (todos) {
@@ -59,14 +60,6 @@ var View = (function () {
                     return;
                 }
 
-//                $(e.target).closest('li').toggleClass('completed');
-//
-//                if ($(e.target).attr('checked') === 'checked') {
-//                    $(e.target).removeAttr('checked');
-//                } else {
-//                    $(e.target).attr('checked', '');
-//                }
-
                 if ($(e.target).attr('checked') === 'true' && $(e.target).closest('li').hasClass('true')) {
                     $(e.target).removeAttr('checked');
                     $(e.target).closest('li').removeClass('true');
@@ -92,6 +85,48 @@ var View = (function () {
 
                 id = $(e.target).closest('li').attr('data-id');
                 handler(id);
+            });
+        } else if (chanalName === 'activeBtn') {
+            var self = this;
+            
+            this.filters.find('li #active').on('click', function (e) {
+                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'active') {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                $(self.filters).find('li a').removeClass('selected');
+                $(e.target).addClass('selected');
+                
+                handler();
+            });
+        } else if (chanalName === 'completedBtn') {
+            var self = this;
+            
+            this.filters.find('li #completed').on('click', function (e) {        
+                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'completed') {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                $(self.filters).find('li a').removeClass('selected');
+                $(e.target).addClass('selected');
+                
+                handler();
+            });
+        } else if (chanalName === 'allBtn') {
+            var self = this;
+            
+            this.filters.find('li #all').on('click', function (e) {
+                if ($(e.target).hasClass('selected') || !$(e.target).attr('id') === 'all') {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                $(self.filters).find('li a').removeClass('selected');
+                $(e.target).addClass('selected');
+                
+                handler();
             });
         }
     };

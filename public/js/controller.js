@@ -25,6 +25,18 @@ var Controller = (function () {
             self.completeItem(id);
             self.leftItems();
         });
+        
+        this.view.addChanals('completedBtn', function () {
+            self.getCompleted();
+        });
+        
+        this.view.addChanals('activeBtn', function () {
+            self.getActive();
+        });
+        
+        this.view.addChanals('allBtn', function () {
+            self.show();
+        });
     }
 
     Controller.prototype.show = function () {
@@ -55,15 +67,21 @@ var Controller = (function () {
             });
 
         $('.todo-count')
-            .html('<strong>' + this.uncompletedCount.length + ' ' + '</strong>' + 'items left');
+            .html('<strong>' + this.uncompletedCount.length + '</strong>' + ' ' + 'items left');
+        
+        return this.uncompletedCount;
     };
 
-    Controller.prototype.getComplited = function () {
-        this.model.getALL().filter(function (item) {
+    Controller.prototype.getCompleted = function () {
+        this.completed = this.model.getAll().filter(function (item) {
             return item.completed === true;
         });
-
+        this.view.render(this.completed);
     };
+    
+    Controller.prototype.getActive = function () {
+        this.view.render(this.uncompletedCount);
+    }
 
     return Controller;
 })();
