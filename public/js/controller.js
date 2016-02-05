@@ -24,6 +24,10 @@ var Controller = (function () {
         this.view.addChannels('filter', function (filter) {
             self.toFilter(filter)
         });
+        
+        this.view.addChannels('compleate', function (id) {
+            self.toCompleate(id)
+        });
     }
 
     Controller.prototype.show = function () {
@@ -42,6 +46,11 @@ var Controller = (function () {
 
     Controller.prototype.toFilter = function (filter) {
         this.filter = filter;
+        this.show();
+    };
+    
+     Controller.prototype.toCompleate = function (id) {
+        this.model.compleateItem(id);
         this.show();
     };
 

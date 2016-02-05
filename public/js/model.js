@@ -66,6 +66,14 @@ var Model = (function () {
 
         this.items.splice(currentIndex, 1);
     };
+    
+    Model.prototype.compleateItem = function (id) {
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+
+        this.items[currentIndex].checked = !this.items[currentIndex].checked;
+    };
 
 
     return Model;

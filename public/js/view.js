@@ -36,7 +36,7 @@ var View = (function () {
             template = defaultTemplate.replace('{{id}}', item.id);
 
         template = template.replace('{{completed}}', item.completed);
-        template = template.replace('{{checked}}', item.checked);
+        template = template.replace('{{checked}}', item.checked ? 'checked' : '');
         template = template.replace('{{title}}', item.title);
 
         this.view = this.view + template;
@@ -78,6 +78,22 @@ var View = (function () {
                 $(this).addClass('selected');
 
                 handler($(e.target).attr('data-filter'));
+            })
+        }
+        
+         if (channelName === 'compleate') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if (!$(e.target).hasClass('toggle')) {      
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
+                handler(id);
             })
         }
     };
