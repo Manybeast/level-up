@@ -2,37 +2,37 @@
  * Created by IlyaLitvinov on 14.01.16.
  */
 //globals observer app
-(function (window) {
+
+var View = (function () {
     function View() {
+        console.log('View');
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
-
-        this.view = '';
+        this.filters = $($('.filters')).find('a');
     }
 
-    View.prototype.render = function (data) {
+    View.prototype.render = function (todos, params) {
         var self = this;
 
         this.view = '';
-        data.forEach(function (item) {
+
+        todos.forEach(function (item) {
             self.renderOne(item);
         });
 
-        debugger;
         this.output.html(this.view);
     };
 
     View.prototype.renderOne = function (item) {
-
         //Шаблон для отрисовки одного элемента списка
-        var defaultTemplate =  '<li data-id="{{id}}" class="{{completed}}">'
-            + '<div class="view">'
-            + '<input class="toggle" type="checkbox" {{checked}}>'
-            + '<label>{{title}}</label>'
-            + '<button class="destroy"></button>'
-            + '</div>'
-            + '</li>',
+        var defaultTemplate = '<li data-id="{{id}}" class="{{completed}} ">'
+                + '<div class="view">'
+                + '<input class="toggle" type="checkbox" {{checked}}>'
+                + '<label class = "title">{{title}}</label>'
+                + '<button class="destroy"></button>'
+                + '</div>'
+                + '</li>',
             template = defaultTemplate.replace('{{id}}', item.id);
 
         template = template.replace('{{completed}}', item.completed);
@@ -42,28 +42,49 @@
         this.view = this.view + template;
     };
 
-    View.prototype.bind = function (event, handler) {
+    View.prototype.addChannels = function (channelName, handler) {
         var self = this;
 
-        //разделение "каналов" событий
-        if (event === 'addItem') {
-            bindCustomEvents(self.input, 'blur keypress', function (e) {
+        if (channelName === 'addItem') {
+            bindCustomEvents(self.input, 'keypress', function (e) {
                 var title = self.input.val();
-
                 //навешевание слбытия на клавишу enter code = 13
-                if((e.which === 13 || e.type === 'blur') && title) {
+                if ((e.which === 13 || e.type === 'blur') && title) {
                     handler(title);
                     self.input.val('');
                 }
             });
         }
+        if (channelName === 'deleteItem') {
+            bindCustomEvents(this.output, 'click', function (e) {
+                var target = null,
+                    id = null;
+
+                if (!$(e.target).hasClass('destroy')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
+                handler(id);
+            })
+        }
+        if (channelName === 'filter') {
+            bindCustomEvents(this.filters, 'click', function (e) {
+                $(self.filters).removeClass('selected');
+
+                $(this).addClass('selected');
+
+                handler($(e.target).attr('data-filter'));
+            })
+        }
     };
 
-    //обертка для более удобного навешивания событий для работы с разными сущностями.
     function bindCustomEvents(target, type, callback) {
         target.on(type, callback);
     }
 
-    window.app = window.app || {};
-    window.app.View = View;
-})(window);
+    return View;
+})();
