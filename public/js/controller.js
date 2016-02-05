@@ -7,6 +7,7 @@ var Controller = (function () {
         var self = this;
         this.view = view;
         this.model = model;
+        this.filter = 'all';
 
         //Первоначальная отрисовка списка
         this.show();
@@ -16,16 +17,16 @@ var Controller = (function () {
         this.view.addChannels('deleteItem', function (id) {
             self.deleteItem(id);
         });
-        this.view.addChannels('test', function () {
-            console.log('test');
+        this.view.addChannels('ttt', function (id) {
+            self.changeState(id);
         });
-        this.view.addChannels('strikeout', function () {
-            console.log('strikeout');
+        this.view.addChannels('filter', function (filter) {
+            self.toFilter(filter);
         });
     }
 
     Controller.prototype.show = function () {
-        this.view.render(this.model.getAll());
+        this.view.render(this.model.getItems(this.filter));
     };
 
     Controller.prototype.setItem = function (title) {
@@ -36,7 +37,16 @@ var Controller = (function () {
     Controller.prototype.deleteItem = function (id) {
         this.model.deleteItem(id);
         this.show();
-    };    
+    };
+
+    Controller.prototype.toFilter = function (filter) {
+        this.filter = filter;
+        this.show();
+    }
+    Controller.prototype.changeState = function (id) {
+        this.model.getblabla(id);
+        this.show();
+    }    
 
     return Controller;
 })();

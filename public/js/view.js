@@ -9,9 +9,10 @@ var View = (function () {
         this.activeBtn = $('#active');
         this.input = $('.new-todo');
         this.output = $('.todo-list');
+        this.filters = $($('.filters')).find('a');
     }
 
-    View.prototype.render = function (todos) {
+    View.prototype.render = function (todos, params) {
         var self = this;
 
         this.view = '';
@@ -35,7 +36,7 @@ var View = (function () {
             template = defaultTemplate.replace('{{id}}', item.id);
 
         template = template.replace('{{completed}}', item.completed);
-        template = template.replace('{{checked}}', item.checked);
+        template = template.replace('{{checked}}', item.completed ? 'checked' : '');
         template = template.replace('{{title}}', item.title);
 
         this.view = this.view + template;
@@ -69,27 +70,20 @@ var View = (function () {
                 id = $(target).parent().parent().attr('data-id');
                 handler(id);
             });
-        } else if (channelName === 'test') {
+        } else if (channelName === 'ttt') {
             bindCustomEvents(this.output, 'click', function (e) {
-                if (!$(e.target).hasClass('title')) {
-                    e.preventDefault();
-                    return;
+                if ($(e.target).hasClass('toggle')) {
+                    id = $(e.target).parent().parent().attr('data-id');
+                    handler(id);
                 }
-
-                $(e.target).css({
-                    color: 'red'
-                })
             })
-        } else if (channelName === 'strikeout') {
-            bindCustomEvents(this.output, 'click', function (e) {
-                if (!$(e.target).hasClass('title')) {
-                    e.preventDefault();
-                    return;
-                }
+        } else if (channelName === 'filter') {
+            bindCustomEvents(this.filters, 'click', function (e) {
+                $(self.filters).removeClass('selected');
 
-                $(e.target).css({
-                    textDecoration: 'line-through'
-                })
+                $(this).addClass('selected');
+
+                handler($(e.target).attr('data-filter'));
             })
         }
     };
