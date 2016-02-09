@@ -5,6 +5,7 @@ var Controller = (function () {
     function Controller (model, view) {
         console.log('init Controller');
         var self = this;
+
         this.view = view;
         this.model = model;
         this.filter = 'all';
@@ -20,8 +21,11 @@ var Controller = (function () {
         this.view.addChannels('ttt', function (id) {
             self.changeState(id);
         });
-        this.view.addChannels('filter', function (filter) {
+        this.view.addChannels('filterTasks', function (filter) {
             self.toFilter(filter);
+        });
+        this.view.addChannels('clearCompleted', function (id) {
+            self.completedClear(id);
         });
     }
 
@@ -39,14 +43,20 @@ var Controller = (function () {
         this.show();
     };
 
-    Controller.prototype.toFilter = function (filter) {
-        this.filter = filter;
-        this.show();
-    }
     Controller.prototype.changeState = function (id) {
         this.model.getblabla(id);
         this.show();
-    }    
+    };   
+
+    Controller.prototype.toFilter = function (filter) {
+        this.filter = filter;
+        this.show();
+    };
+
+    Controller.prototype.completedClear = function (id) {
+        this.model.clearComplet(id);
+        this.show();
+    }; 
 
     return Controller;
 })();

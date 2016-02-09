@@ -6,7 +6,7 @@ var Model = (function (){
         this.items = [{
                 id: 0,
                 title: "Test",
-                completed: true
+                completed: true,
             },
             {
                 id: 1,
@@ -27,15 +27,15 @@ var Model = (function (){
                 'all': function () {
                     return self.items;
                 },
-                'completed': function () {
-                   return self.items.filter(function (item) {
-                        return item.completed === true;
-                    })
-                },
                 'active': function () {
                     return self.items.filter(function (item) {
                         return item.completed === false;
-                    })
+                    });
+                },
+                'completed': function () {
+                   return self.items.filter(function (item) {
+                        return item.completed === true;
+                    });
                 }
             };
 
@@ -64,13 +64,23 @@ var Model = (function (){
 
         this.items.splice(currentIndex, 1);
     };
+
     Model.prototype.getblabla = function (id) {
         console.log(id);
-         var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+        
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
             return item.id === parseInt(id);
         })[0]);
 
         this.items[currentIndex].completed = !this.items[currentIndex].completed;
+    };
+
+    Model.prototype.clearComplet = function (id) {
+        var currentIndex = this.items.indexOf(this.items.filter(function (item) {
+            return item.id === parseInt(id);
+        })[0]);
+        
+        this.items.splice(currentIndex, 1);
     }
 
     return Model;

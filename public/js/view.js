@@ -70,21 +70,39 @@ var View = (function () {
                 id = $(target).parent().parent().attr('data-id');
                 handler(id);
             });
-        } else if (channelName === 'ttt') {
+        } else if (channelName === 'completed') {
             bindCustomEvents(this.output, 'click', function (e) {
                 if ($(e.target).hasClass('toggle')) {
                     id = $(e.target).parent().parent().attr('data-id');
                     handler(id);
                 }
-            })
-        } else if (channelName === 'filter') {
+            });
+        } else if (channelName === 'filterTasks') {
             bindCustomEvents(this.filters, 'click', function (e) {
-                $(self.filters).removeClass('selected');
 
+                if (!$(e.target).hasClass('selected')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                $(self.filters).removeClass('selected');
                 $(this).addClass('selected');
 
                 handler($(e.target).attr('data-filter'));
-            })
+            });
+        } else if (channelName === 'clearCompleted') {
+            bindCustomEvents(this.button, 'click', function (e) {
+
+                if ($(e.target).hasClass('clear-completed')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                target = e.target;
+
+                id = $(target).parent().parent().attr('data-id');
+                handler(id)
+            });
         }
     };
 
