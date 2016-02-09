@@ -5,37 +5,34 @@
     <title>MVC fork</title>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .wrapper {
+            border:2px solid black;
+            width:100px;
+            margin: 0 auto;
+        }
+        .circle {
+            width:50px;
+            height:50px;
+            border:2px solid black;
+            border-radius: 50%;
+            margin: 0 auto
+        }
+        .red.active{
+            background: red;
+        }
+        .yellow.active {
+            background: yellow;
+        }
+        .green.active {
+            background: green;
+        }
+    </style>
 </head>
 <body>
-<section class="todoapp">
-    <header class="header">
-        <h1>todos</h1>
-        <input class="new-todo" placeholder="What needs to be done?" autofocus>
-    </header>
-    <section class="main">
-        <input class="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as complete</label>
-        <ul class="todo-list"></ul>
-    </section>
-    <footer class="footer">
-        <span class="todo-count"></span>
-        <ul class="filters">
-            <li>
-                <a data-filter = "all" class="selected">All</a>
-            </li>
-            <li>
-                <a data-filter = "active" >Active</a>
-            </li>
-            <li>
-                <a data-filter = "completed">Completed</a>
-            </li>
-        </ul>
-        <button class="clear-completed">Clear completed</button>
-    </footer>
-</section>
-<footer class="info">
-    <p>Double-click to edit a todo</p>
-</footer>
+<div class="wrapper" id = "lighter">
+
+</div>
 <script src = "/bower_components/jquery/dist/jquery.min.js"></script>
 <script src = "/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/js/observer.js"></script>
