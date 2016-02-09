@@ -120,6 +120,7 @@ var Products = (function () {
         var self = this,
             li,
             title,
+            editField,
             deleteBtn;
 
         li = document.createElement('li');
