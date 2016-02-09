@@ -74,5 +74,11 @@ var Model = (function (){
             });
     };
 
+    Model.prototype.clearCompleted = function () {
+        this.items = this.items.filter(function (item) {
+            return item.completed === false;
+        });
+    };
+
     return Model;
 })();
