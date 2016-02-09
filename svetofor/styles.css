@@ -1,0 +1,28 @@
+.container {
+    display: inline-block;
+    margin-left: 50px;
+    background: silver;
+}
+.hidden {
+        display: none;
+}
+
+.on.red {
+        background: red;
+}
+
+.on.yellow {
+        background: yellow;
+}
+
+.on.green {
+        background: green;
+}
+
+.circle {
+        width: 50px;
+        height: 50px;
+        /* background: silver;*/
+        border-radius: 100%;
+        border: 1px solid black;
+}
