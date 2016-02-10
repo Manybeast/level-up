@@ -102,6 +102,8 @@ var Products = (function () {
         this.listItem = this.root.querySelector('.listProducts');
         this.addBtn = this.root.querySelector('.add');        
         this.productField = this.root.querySelector('.fieldProduct');
+        this.delNumBtn= this.root.querySelector('.removeNum');
+        this.numberField = this.root.querySelector('.numberField');
         this.getItems();
         this.addEvents();
     }
@@ -173,7 +175,7 @@ var Products = (function () {
             this.style.display = 'none';
             title.style.display = 'block';
            };
-        })
+        });
 
         return li;
     }
@@ -193,11 +195,16 @@ var Products = (function () {
         this.addBtn.addEventListener('click', function () {
             self.addFruits();
         });
+
         this.productField.addEventListener('keypress', function (e) {
             if(e.keyCode === 13) {
                 self.addFruits();
             }
-        })
+        });
+
+        this.delNumBtn.addEventListener('click', function () {
+            self.removeNumber();
+        });
     }
 
     Constructor.prototype.addFruits = function () {
@@ -233,6 +240,12 @@ var Products = (function () {
         }, editItem);
         
     };
+
+    Constructor.prototype.removeNumber = function() {               
+        console.log(this.numberField.value);
+
+
+    }
 
    
 
