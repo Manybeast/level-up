@@ -111,7 +111,8 @@ var Products = (function () {
         this.listItem.innerHTML = '';
         this.items.forEach(function (item, i) {           
             self.listItem.appendChild(self.renderOne(item, i));            
-        })
+        });
+         this.productField.value = '';
     }
 
     Constructor.prototype.renderOne = function (text, i) {
@@ -126,7 +127,7 @@ var Products = (function () {
         deleteBtn = document.createElement('span'); 
         editField = document.createElement('input');
         editField.style.display = 'none';      
-       
+        editField.classList.add('editField');
 
         deleteBtn.classList.add('deleteBtn');
         deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
@@ -140,8 +141,9 @@ var Products = (function () {
         li.appendChild(editField);
         li.appendChild(deleteBtn);
 
-        title.addEventListener('dblclick', function () {
+        title.addEventListener('dblclick', function () {            
             editField.style.display = 'inline-block';
+            editField.focus();
             this.style.display = 'none';
         });
 
