@@ -124,12 +124,17 @@ var Products = (function () {
 
         li = document.createElement('li');
         title = document.createElement('span');
-        deleteBtn = document.createElement('span'); 
+        deleteBtn = document.createElement('span');
+        editBtn = document.createElement('span');
         editField = document.createElement('input');
         editField.style.display = 'none';      
+        
+        title.classList.add('productValue');
         editField.classList.add('editField');
-
         deleteBtn.classList.add('deleteBtn');
+        editBtn.classList.add('editBtn');
+        
+        editBtn.innerHTML = '<i class="fa fa-pencil-square-o"></i>'
         deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
         deleteBtn.addEventListener('click', function () {
             self.removeFruits(i);
@@ -139,13 +144,22 @@ var Products = (function () {
         editField.value = text;    
         li.appendChild(title);
         li.appendChild(editField);
+        li.appendChild(editBtn);
         li.appendChild(deleteBtn);
 
+        
         title.addEventListener('dblclick', function () {            
             editField.style.display = 'inline-block';
             editField.focus();
             this.style.display = 'none';
         });
+
+        editBtn.addEventListener('click', function () {            
+            editField.style.display = 'inline-block';
+            editField.focus();
+            title.style.display = 'none';
+        });
+
 
         editField.addEventListener('blur', function (e) {
             self.edit(this.value, i);
