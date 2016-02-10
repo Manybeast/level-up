@@ -82,8 +82,7 @@ var AJAX = {
 
         xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
-            if (this.status != 200) {
-                // обработать ошибку
+            if (this.status != 200) {                
                 console.log('Error');
                 return;
             }
@@ -101,8 +100,7 @@ var Products = (function () {
         this.items = [];
         this.root = document.querySelector(root);
         this.listItem = this.root.querySelector('.listProducts');
-        this.addBtn = this.root.querySelector('.add');
-        this.removeBtn = this.root.querySelector('.remove');
+        this.addBtn = this.root.querySelector('.add');        
         this.productField = this.root.querySelector('.fieldProduct');
         this.getItems();
         this.addEvents();
@@ -131,7 +129,7 @@ var Products = (function () {
        
 
         deleteBtn.classList.add('deleteBtn');
-        deleteBtn.innerHTML = ' x';
+        deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
         deleteBtn.addEventListener('click', function () {
             self.removeFruits(i);
         });
