@@ -101,9 +101,7 @@ var Products = (function () {
         this.root = document.querySelector(root);
         this.listItem = this.root.querySelector('.listProducts');
         this.addBtn = this.root.querySelector('.add');        
-        this.productField = this.root.querySelector('.fieldProduct');
-        this.delNumBtn= this.root.querySelector('.removeNum');
-        this.numberField = this.root.querySelector('.numberField');
+        this.productField = this.root.querySelector('.fieldProduct');        
         this.getItems();
         this.addEvents();
     }
@@ -201,10 +199,6 @@ var Products = (function () {
                 self.addFruits();
             }
         });
-
-        this.delNumBtn.addEventListener('click', function () {
-            self.removeNumber();
-        });
     }
 
     Constructor.prototype.addFruits = function () {
@@ -239,15 +233,7 @@ var Products = (function () {
             self.renderAll();
         }, editItem);
         
-    };
-
-    Constructor.prototype.removeNumber = function() {               
-        console.log(this.numberField.value);
-
-
-    }
-
-   
+    };  
 
     return Constructor;
 })();
