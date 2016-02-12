@@ -6,6 +6,7 @@ var View = (function () {
         this.input = $('.new-todo');
         this.output = $('.todo-list');
         this.filters = $('.filters a');
+        this.clearCompleted = $('.clear-completed');
     }
 
     View.prototype.render = function (todos) {
@@ -87,6 +88,10 @@ var View = (function () {
                 $(e.target).addClass('selected');
 
                 handler($(e.target).attr('id'));
+            });
+        } else if (chanalName === 'clearCompleted') {
+            this.clearCompleted.on('click', function () {
+                    handler();
             });
         }
     };

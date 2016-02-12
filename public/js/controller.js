@@ -28,6 +28,11 @@ var Controller = (function () {
         this.view.addChanals('filterBtn', function (filter) {
             self.filterBtn(filter);
         });
+
+        this.view.addChanals('clearCompleted', function () {
+            self.clearCompleted();
+            self.leftItems();
+        });
     }
 
     Controller.prototype.show = function () {
@@ -58,6 +63,11 @@ var Controller = (function () {
 
     Controller.prototype.filterBtn = function (filter) {
         this.filter = filter;
+        this.show();
+    };
+
+    Controller.prototype.clearCompleted = function () {
+        this.model.clearCompleted();
         this.show();
     };
 
