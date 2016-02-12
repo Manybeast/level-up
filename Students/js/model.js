@@ -34,10 +34,6 @@ var Model = (function () {
 		console.log('init Model')
 	}
 
-	function generateId () {
-        return Math.floor((1 + Math.random()) * 0x10000);
-    }
-
     Model.prototype.getStudents = function () {
     	return this.studentsList;
     };
