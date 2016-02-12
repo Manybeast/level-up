@@ -1,0 +1,36 @@
+h1 {
+	margin-top: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.table {
+	margin: 15px auto;
+	width: 554px;
+	height: 900px;
+}
+
+.cell {
+	display: inline-block;
+	width: 180px;
+	height: 600px;
+	border: 1px solid black;
+}
+
+.cell div {
+	width: 180px;
+	height: 20px;
+	border-bottom: 1px solid black;
+	text-align: center;
+	background: #CDCDCD;
+	padding: 0px;
+	line-height: 20px;
+	box-sizing: border-box;
+}
+
+.cell ul {
+	padding: 5px;
+	text-align: center;
+}
+

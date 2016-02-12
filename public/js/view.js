@@ -39,9 +39,9 @@ var View = (function () {
 
     };
 
-    function bindCustomEvent (target, type, callback) {
-        target.on(type, callback);
-    }
+    // function bindCustomEvent (target, type, callback) {
+    //     target.on(type, callback);
+    // }
 
     View.prototype.addChanals = function (chanalName, handler) {
         var self = this;
